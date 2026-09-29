@@ -8,11 +8,13 @@ export default {
         mono: ['"SF Mono"', 'monospace'],
       },
       colors: {
-        ink:    '#0a0a0a',
-        chalk:  '#f5f5f0',
-        smoke:  '#888888',
-        ash:    '#d4d4d4',
-        border: 'rgba(255,255,255,0.10)',
+        white:  '#ffffff',
+        black:  '#000000',
+        ink:    '#ffffff',
+        chalk:  '#0a0a0a',
+        smoke:  '#666666',
+        ash:    '#27272a',
+        border: 'rgba(0,0,0,0.08)',
       },
       letterSpacing: {
         widest2: '0.22em',

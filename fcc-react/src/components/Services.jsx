@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 const services = [
@@ -47,51 +47,56 @@ function ServiceCard({ svc, index }) {
       transition={{ duration: 0.7, delay: index * 0.07, ease: [0.16,1,0.3,1] }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="service-card noise-card group relative border border-white/10 p-10 cursor-none
-        bg-[#080808] overflow-hidden">
+      className="service-card glass-card noise-card group relative rounded-3xl p-8 cursor-none
+        overflow-hidden flex flex-col justify-between">
 
       {/* Animated top border */}
       <motion.div
-        className="absolute top-0 left-0 h-[2px] bg-chalk"
+        className="absolute top-0 left-0 h-[2px] bg-black"
         initial={{ width: '0%' }}
         animate={{ width: hovered ? '100%' : '0%' }}
         transition={{ duration: 0.45, ease: [0.16,1,0.3,1] }}
       />
 
-      {/* BG emoji (decorative) */}
-      <div className="absolute -right-4 -bottom-4 text-[80px] opacity-[0.04] select-none
-        pointer-events-none group-hover:opacity-[0.07] transition-opacity duration-500
-        group-hover:scale-110 transform origin-bottom-right">
-        {svc.emoji}
+      <div>
+        {/* BG emoji (decorative) */}
+        <div className="absolute -right-4 -bottom-4 text-[80px] opacity-[0.06] select-none
+          pointer-events-none group-hover:opacity-[0.12] transition-opacity duration-500
+          group-hover:scale-110 transform origin-bottom-right">
+          {svc.emoji}
+        </div>
+
+        {/* Number & Tag */}
+        <div className="flex items-center justify-between mb-6">
+          <div className="service-num text-[0.68rem] font-bold tracking-widest text-black/60 glass-pill px-3 py-1 rounded-full">
+            {svc.num}
+          </div>
+          <span className="text-xl">{svc.emoji}</span>
+        </div>
+
+        <h3 className="text-[1.35rem] font-bold tracking-tight mb-2 leading-tight text-black">
+          {svc.title}
+        </h3>
+        <p className="text-smoke text-sm italic mb-6">{svc.tagline}</p>
+
+        <ul className="space-y-2 mb-8">
+          {svc.tags.map(t => (
+            <li key={t} className="text-[0.78rem] text-black/70 flex items-center gap-2 font-medium">
+              <span className="w-3 h-px bg-black/30 inline-block" />
+              {t}
+            </li>
+          ))}
+        </ul>
       </div>
-
-      {/* Number */}
-      <div className="service-num text-[0.6rem] font-bold tracking-widest text-white/20 mb-6">
-        {svc.num}
-      </div>
-
-      <h3 className="text-[1.4rem] font-bold tracking-tight mb-2 leading-tight">
-        {svc.title}
-      </h3>
-      <p className="text-smoke text-sm italic mb-6">{svc.tagline}</p>
-
-      <ul className="space-y-2 mb-8">
-        {svc.tags.map(t => (
-          <li key={t} className="text-[0.78rem] text-ash/70 flex items-center gap-2">
-            <span className="w-4 h-px bg-smoke/40 inline-block" />
-            {t}
-          </li>
-        ))}
-      </ul>
 
       {/* Placeholder visual */}
-      <div className="w-full aspect-video bg-[#0f0f0f] border border-white/8 flex items-center
-        justify-center relative overflow-hidden">
+      <div className="w-full aspect-video rounded-xl bg-white/40 border border-black/8 flex items-center
+        justify-center relative overflow-hidden backdrop-blur-sm">
         <div className="absolute inset-0" style={{
-          backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px)',
+          backgroundImage: 'linear-gradient(rgba(0,0,0,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.02) 1px,transparent 1px)',
           backgroundSize: '24px 24px'
         }} />
-        <span className="text-white/10 text-3xl relative z-10">◈</span>
+        <span className="text-black/20 text-3xl relative z-10">◈</span>
       </div>
     </motion.div>
   );
@@ -101,7 +106,7 @@ export default function Services() {
   const [ref, inView] = useInView({ threshold: 0.05, triggerOnce: true });
 
   return (
-    <section id="services" className="py-[120px] border-b border-white/10 bg-[#050505]">
+    <section id="services" className="py-[120px] border-b border-black/10 bg-white/70 relative z-10">
       <div className="max-w-[1360px] mx-auto px-8 md:px-12">
 
         {/* Header */}
@@ -114,16 +119,16 @@ export default function Services() {
             <p className="text-[0.68rem] font-bold tracking-widest2 uppercase text-smoke mb-4">
               WHAT'S BREWING?
             </p>
-            <h2 className="text-[clamp(2.8rem,5vw,5.5rem)] font-black leading-[1.02] tracking-tight">
+            <h2 className="text-[clamp(2.8rem,5vw,5.5rem)] font-black leading-[1.02] tracking-tight text-black">
               Pick your<br />
-              <em className="font-extralight italic">blend.</em>
+              <em className="font-extralight italic text-black/70">blend.</em>
             </h2>
           </div>
 
           {/* Fun badge */}
-          <div className="w-28 h-28 rounded-full border border-white/15 flex items-center
-            justify-center animate-spin-slow shrink-0 self-start md:self-auto">
-            <span className="text-[0.4rem] tracking-[0.16em] text-white/25 uppercase text-center leading-loose px-2">
+          <div className="w-28 h-28 rounded-full glass-panel flex items-center
+            justify-center animate-spin-slow shrink-0 self-start md:self-auto shadow-md">
+            <span className="text-[0.42rem] tracking-[0.16em] text-black/60 uppercase text-center leading-loose px-2 font-bold">
               SIX BLENDS · SIX BLENDS · SIX BLENDS ·
             </span>
           </div>
@@ -143,8 +148,8 @@ export default function Services() {
             transition={{ duration: 0.6, ease: [0.16,1,0.3,1] }}>
             <a href="#contact"
               onClick={e => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior:'smooth' }); }}
-              className="mag-btn border border-chalk text-chalk text-[0.78rem] font-black
-                tracking-widest uppercase px-12 py-5 cursor-none">
+              className="mag-btn border border-black bg-black text-white text-[0.78rem] font-black
+                tracking-widest uppercase px-12 py-5 cursor-none rounded-full shadow-lg hover:bg-black/90">
               <span>LET'S GET BREWING</span>
               <span className="ml-2">→</span>
             </a>

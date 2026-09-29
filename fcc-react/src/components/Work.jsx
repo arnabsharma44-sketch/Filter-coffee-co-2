@@ -19,53 +19,52 @@ function WorkCard({ tag, label, cls, index }) {
       initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, delay: index * 0.08, ease: [0.16,1,0.3,1] }}
-      className={`work-card noise-card group relative overflow-hidden bg-[#0f0f0f] border
-        border-white/8 cursor-none ${cls}`}>
+      className={`work-card glass-card noise-card group relative overflow-hidden rounded-2xl cursor-none ${cls}`}>
 
       {/* Placeholder visual */}
-      <div className="w-full h-full min-h-[200px] flex items-center justify-center relative">
+      <div className="w-full h-full min-h-[220px] flex items-center justify-center relative p-6">
         {/* Animated grid pattern */}
         <div className="absolute inset-0"
           style={{
-            backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px)',
+            backgroundImage: 'linear-gradient(rgba(0,0,0,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.03) 1px,transparent 1px)',
             backgroundSize: '32px 32px'
           }} />
 
         {/* Corner decorations */}
-        <span className="absolute top-3 left-3 w-3 h-3 border-t border-l border-white/20" />
-        <span className="absolute bottom-3 right-3 w-3 h-3 border-b border-r border-white/20" />
+        <span className="absolute top-4 left-4 w-3 h-3 border-t border-l border-black/20" />
+        <span className="absolute bottom-4 right-4 w-3 h-3 border-b border-r border-black/20" />
 
         {/* Center placeholder */}
         <div className="relative z-10 text-center">
-          <div className="w-12 h-12 mx-auto mb-3 border border-white/15 flex items-center
-            justify-center text-white/15 text-2xl">
+          <div className="w-12 h-12 mx-auto mb-3 border border-black/15 rounded-xl flex items-center
+            justify-center text-black/30 text-2xl glass-pill">
             ◈
           </div>
-          <span className="text-[0.6rem] tracking-widest uppercase text-white/15">
+          <span className="text-[0.62rem] font-bold tracking-widest uppercase text-black/40">
             Visual
           </span>
         </div>
 
         {/* Hover overlay */}
-        <div className="absolute inset-0 bg-ink/80 backdrop-blur-sm flex flex-col items-center
-          justify-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-400 z-20">
-          <span className="text-[0.58rem] font-semibold tracking-widest uppercase border
-            border-white/30 text-white/60 px-3 py-1">
+        <div className="absolute inset-0 bg-white/90 backdrop-blur-md flex flex-col items-center
+          justify-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-400 z-20 p-6 text-center">
+          <span className="text-[0.6rem] font-bold tracking-widest uppercase border
+            border-black/20 text-black/70 px-3 py-1 rounded-full glass-pill">
             {tag}
           </span>
-          <span className="text-lg font-bold tracking-tight">{label}</span>
-          <span className="text-sm text-smoke mt-1">View →</span>
+          <span className="text-xl font-black tracking-tight text-black">{label}</span>
+          <span className="text-xs font-semibold text-smoke mt-1">View Project →</span>
         </div>
       </div>
 
       {/* Bottom label — always visible */}
-      <div className="absolute bottom-0 inset-x-0 px-4 py-3 bg-gradient-to-t from-ink to-transparent
+      <div className="absolute bottom-0 inset-x-0 px-5 py-4 bg-gradient-to-t from-white/95 via-white/70 to-transparent
         flex items-end justify-between group-hover:opacity-0 transition-opacity z-10">
-        <span className="text-[0.58rem] font-semibold tracking-widest uppercase text-smoke/60
-          border border-white/15 px-2 py-0.5">
+        <span className="text-[0.58rem] font-bold tracking-widest uppercase text-black/70
+          border border-black/15 px-2.5 py-1 rounded-full glass-pill">
           {tag}
         </span>
-        <span className="text-sm font-semibold">{label}</span>
+        <span className="text-sm font-bold text-black">{label}</span>
       </div>
     </motion.div>
   );
@@ -75,7 +74,7 @@ export default function Work() {
   const [ref, inView] = useInView({ threshold: 0.05, triggerOnce: true });
 
   return (
-    <section id="work" className="py-[120px] border-b border-white/10 bg-ink">
+    <section id="work" className="py-[120px] border-b border-black/10 bg-white/50 relative z-10">
       <div className="max-w-[1360px] mx-auto px-8 md:px-12">
 
         {/* Header */}
@@ -88,12 +87,12 @@ export default function Work() {
             <p className="text-[0.68rem] font-bold tracking-widest2 uppercase text-smoke mb-4">
               FRESHLY BREWED
             </p>
-            <h2 className="text-[clamp(2.8rem,5vw,5.5rem)] font-black leading-[1.02] tracking-tight">
+            <h2 className="text-[clamp(2.8rem,5vw,5.5rem)] font-black leading-[1.02] tracking-tight text-black">
               Work worth a<br />
-              <em className="font-extralight italic">double tap.</em>
+              <em className="font-extralight italic text-black/70">double tap.</em>
             </h2>
           </div>
-          <p className="text-smoke text-sm max-w-xs leading-relaxed md:text-right">
+          <p className="text-smoke text-sm max-w-xs leading-relaxed md:text-right font-medium">
             A fresh pour of campaigns, content and social-first ideas we've brewed for brands.
           </p>
         </motion.div>

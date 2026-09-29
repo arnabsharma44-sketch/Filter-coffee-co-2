@@ -39,13 +39,13 @@ export default function Contact() {
   };
 
   const fieldCls = (name) =>
-    `w-full bg-transparent border text-chalk text-sm px-5 py-4 outline-none
-    placeholder-white/20 font-sans transition-colors duration-300
-    ${errors[name] ? 'border-white/60' : 'border-white/12 focus:border-white/60'}`;
+    `w-full glass-input text-black text-sm px-5 py-4 rounded-2xl outline-none
+    placeholder-black/30 font-sans transition-colors duration-300
+    ${errors[name] ? 'border-red-400' : 'border-black/10 focus:border-black/40'}`;
 
   return (
     <section id="contact"
-      className="py-[120px] border-b border-white/10 bg-[#050505]"
+      className="py-[120px] border-b border-black/10 bg-white/70 relative z-10"
       ref={ref}>
       <div className="max-w-[900px] mx-auto px-8 md:px-12">
 
@@ -54,25 +54,25 @@ export default function Contact() {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.16,1,0.3,1] }}
-          className="text-center mb-20">
+          className="text-center mb-16">
 
           <p className="text-[0.68rem] font-bold tracking-widest2 uppercase text-smoke mb-6">
             GOT A BRIEF?
           </p>
 
-          <h2 className="text-[clamp(2.8rem,6vw,6.5rem)] font-black leading-[1] tracking-tight mb-6">
+          <h2 className="text-[clamp(2.8rem,6vw,6.5rem)] font-black leading-[1] tracking-tight text-black mb-6">
             Spill the beans.<br />
-            <em className="font-extralight italic">We'll brew the idea.</em>
+            <em className="font-extralight italic text-black/70">We'll brew the idea.</em>
           </h2>
 
-          <p className="text-smoke text-base max-w-lg mx-auto leading-relaxed mb-10">
+          <p className="text-smoke text-base max-w-lg mx-auto leading-relaxed mb-10 font-medium">
             New campaign? Social needs a refresh? Launch loading? Or just an idea sitting in your notes app?
             Slide into our inbox.
           </p>
 
           <a href="mailto:hello@filtercoffeeco.in"
-            className="mag-btn border border-chalk text-chalk text-[0.78rem] font-black
-              tracking-widest uppercase px-12 py-5 cursor-none mx-auto">
+            className="mag-btn border border-black bg-black text-white text-[0.78rem] font-black
+              tracking-widest uppercase px-12 py-5 cursor-none mx-auto rounded-full shadow-lg hover:bg-black/90 inline-flex">
             <span>SEND THE BRIEF</span>
             <span className="ml-2">→</span>
           </a>
@@ -83,19 +83,19 @@ export default function Contact() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16,1,0.3,1] }}
-          className="border border-white/10 p-10 md:p-14 bg-ink/60 backdrop-blur-sm noise-card">
+          className="glass-panel p-10 md:p-14 rounded-3xl noise-card shadow-xl border border-black/10">
 
           <form ref={formRef} onSubmit={handleSubmit} noValidate className="space-y-7">
             <div className="grid md:grid-cols-2 gap-6">
               <div className="flex flex-col gap-2">
-                <label className="text-[0.62rem] font-bold tracking-widest uppercase text-smoke">
+                <label className="text-[0.65rem] font-bold tracking-widest uppercase text-black/70">
                   Your Name
                 </label>
                 <input name="name" type="text" placeholder="What do we call you?"
                   className={fieldCls('name')} />
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-[0.62rem] font-bold tracking-widest uppercase text-smoke">
+                <label className="text-[0.65rem] font-bold tracking-widest uppercase text-black/70">
                   Brand / Company
                 </label>
                 <input name="brand" type="text" placeholder="Brand in the blend?"
@@ -104,7 +104,7 @@ export default function Contact() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-[0.62rem] font-bold tracking-widest uppercase text-smoke">
+              <label className="text-[0.65rem] font-bold tracking-widest uppercase text-black/70">
                 Email
               </label>
               <input name="email" type="email" placeholder="hello@yourbrand.com"
@@ -112,19 +112,19 @@ export default function Contact() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-[0.62rem] font-bold tracking-widest uppercase text-smoke">
+              <label className="text-[0.65rem] font-bold tracking-widest uppercase text-black/70">
                 What's brewing?
               </label>
               <select name="service" defaultValue=""
-                className={`${fieldCls('service')} cursor-none`}
-                style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23888' d='M6 8L0 0h12z'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 20px center' }}>
+                className={`${fieldCls('service')} cursor-none appearance-none`}
+                style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23000' d='M6 8L0 0h12z'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 20px center' }}>
                 <option value="" disabled>Pick a blend</option>
-                {OPTIONS.map(o => <option key={o.value} value={o.value} style={{ background: '#111' }}>{o.label}</option>)}
+                {OPTIONS.map(o => <option key={o.value} value={o.value} style={{ background: '#ffffff', color: '#000000' }}>{o.label}</option>)}
               </select>
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-[0.62rem] font-bold tracking-widest uppercase text-smoke">
+              <label className="text-[0.65rem] font-bold tracking-widest uppercase text-black/70">
                 The Brief
               </label>
               <textarea name="brief" rows={5}
@@ -137,17 +137,17 @@ export default function Contact() {
               whileTap={{ scale: 0.97 }}
               disabled={status === 'success'}
               className={`mag-btn w-full border text-[0.78rem] font-black tracking-widest
-                uppercase py-5 justify-center transition-all
+                uppercase py-5 justify-center transition-all rounded-full shadow-md
                 ${status === 'success'
-                  ? 'border-white/30 text-smoke cursor-not-allowed'
-                  : 'border-chalk text-chalk cursor-none'}`}>
+                  ? 'bg-emerald-600 border-emerald-600 text-white cursor-not-allowed'
+                  : 'bg-black border-black text-white cursor-none hover:bg-black/90'}`}>
               <span>
                 {status === 'success' ? '☕ BRIEF RECEIVED. WE\'RE BREWING.' : 'BREW IT UP →'}
               </span>
             </motion.button>
 
             {Object.keys(errors).length > 0 && (
-              <p className="text-[0.7rem] text-white/40 text-center">
+              <p className="text-[0.7rem] text-red-500 font-semibold text-center">
                 Looks like some fields need attention ↑
               </p>
             )}
