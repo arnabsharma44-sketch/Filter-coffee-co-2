@@ -58,13 +58,23 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between gap-4">
-          <p className="text-[0.68rem] text-white/20 tracking-wide">
-            © 2025 Filter Coffee Co. All rights reserved.
-          </p>
-          <p className="text-[0.68rem] text-white/20 tracking-wide">
-            Crafted with creativity. Brewed to perfection. ☕
-          </p>
+        <div className="border-t border-white/10 pt-8 flex flex-col gap-4">
+          <div className="flex flex-col md:flex-row justify-between gap-4">
+            <p className="text-[0.68rem] text-white/20 tracking-wide">
+              © 2025 Filter Coffee Co. All rights reserved.
+            </p>
+            <p className="text-[0.68rem] text-white/20 tracking-wide text-left md:text-right">
+              Crafted with creativity. Brewed to perfection. ☕
+            </p>
+          </div>
+          <div className="flex flex-col md:flex-row justify-between gap-4 pt-4 border-t border-white/5">
+            <p className="text-[0.65rem] text-white/30 tracking-wide">
+              Made by JINENDRA BANTHIA and ARNAB SHARMA
+            </p>
+            <p className="text-[0.65rem] text-white/30 tracking-wide text-left md:text-right">
+              Contact: +91 9124483008 | <a href="mailto:jinendra.banthia.iter@gmail.com" className="hover:text-white/60 transition-colors">jinendra.banthia.iter@gmail.com</a>
+            </p>
+          </div>
         </div>
       </div>
     </footer>
