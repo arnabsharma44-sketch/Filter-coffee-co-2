@@ -72,7 +72,7 @@ export default function Footer() {
               Made by JINENDRA BANTHIA and ARNAB SHARMA
             </p>
             <p className="text-[0.65rem] text-white/30 tracking-wide text-left md:text-right">
-              Contact: +91 9124483008 | <a href="mailto:jinendra.banthia.iter@gmail.com" className="hover:text-white/60 transition-colors">jinendra.banthia.iter@gmail.com</a>
+              Contact: <a href="https://wa.me/919124483008?text=Hi!%20I%20would%20like%20to%20connect." target="_blank" rel="noopener noreferrer" className="hover:text-white/60 transition-colors">+91 9124483008</a> | <a href="mailto:jinendra.banthia.iter@gmail.com" className="hover:text-white/60 transition-colors">jinendra.banthia.iter@gmail.com</a>
             </p>
           </div>
         </div>
