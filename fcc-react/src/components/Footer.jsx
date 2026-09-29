@@ -1,14 +1,14 @@
 export default function Footer() {
   const links = [
-    { href: '#work',     label: 'The Good Stuff' },
+    { href: '#work', label: 'The Good Stuff' },
     { href: '#services', label: "What's Brewing?" },
-    { href: '#about',    label: 'Our Blend' },
-    { href: '#clients',  label: 'Our Clients' },
-    { href: '#contact',  label: 'Grab a Coffee' },
+    { href: '#about', label: 'Our Blend' },
+    { href: '#clients', label: 'Our Clients' },
+    { href: '#contact', label: 'Grab a Coffee' },
   ];
   const smoothTo = (href) => {
     const el = document.querySelector(href);
-    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 72, behavior:'smooth' });
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' });
   };
 
   return (
@@ -20,7 +20,7 @@ export default function Footer() {
           Still on the fence?<br />
           <span className="italic font-extralight text-smoke">Let's change that.</span>
         </p>
-        <a href="#contact" onClick={e=>{ e.preventDefault(); smoothTo('#contact'); }}
+        <a href="#contact" onClick={e => { e.preventDefault(); smoothTo('#contact'); }}
           className="mag-btn border border-chalk text-chalk text-[0.72rem] font-black
             tracking-widest uppercase px-10 py-4 cursor-none shrink-0">
           <span>GRAB A COFFEE</span>
@@ -37,7 +37,7 @@ export default function Footer() {
           <nav className="flex flex-col gap-3">
             {links.map(l => (
               <a key={l.href} href={l.href}
-                onClick={e=>{ e.preventDefault(); smoothTo(l.href); }}
+                onClick={e => { e.preventDefault(); smoothTo(l.href); }}
                 className="text-[0.78rem] text-smoke hover:text-chalk transition-colors cursor-none w-fit">
                 {l.label}
               </a>
@@ -46,7 +46,7 @@ export default function Footer() {
           <div>
             <p className="text-[0.6rem] font-bold tracking-widest uppercase text-smoke/50 mb-4">Find us on</p>
             <div className="flex gap-3">
-              {['IG','LI','X'].map(s => (
+              {['IG', 'LI', 'X'].map(s => (
                 <a key={s} href="#" aria-label={s}
                   className="w-10 h-10 border border-white/12 flex items-center justify-center
                     text-[0.62rem] font-bold text-smoke hover:bg-chalk hover:text-ink
@@ -61,7 +61,7 @@ export default function Footer() {
         <div className="border-t border-white/10 pt-8 flex flex-col gap-4">
           <div className="flex flex-col md:flex-row justify-between gap-4">
             <p className="text-[0.68rem] text-white/20 tracking-wide">
-              © 2025 Filter Coffee Co. All rights reserved.
+              © 2026 Filter Coffee Co. All rights reserved.
             </p>
             <p className="text-[0.68rem] text-white/20 tracking-wide text-left md:text-right">
               Crafted with creativity. Brewed to perfection. ☕
@@ -72,7 +72,7 @@ export default function Footer() {
               Made by JINENDRA BANTHIA and ARNAB SHARMA
             </p>
             <p className="text-[0.65rem] text-white/30 tracking-wide text-left md:text-right">
-              Contact: <a href="https://wa.me/919124483008?text=Hi!%20I%20would%20like%20to%20connect." target="_blank" rel="noopener noreferrer" className="hover:text-white/60 transition-colors">+91 9124483008</a> | <a href="mailto:jinendra.banthia.iter@gmail.com" className="hover:text-white/60 transition-colors">jinendra.banthia.iter@gmail.com</a>
+              Contact: +91 9124483008 | <a href="mailto:jinendra.banthia.iter@gmail.com" className="hover:text-white/60 transition-colors">jinendra.banthia.iter@gmail.com</a>
             </p>
           </div>
         </div>
