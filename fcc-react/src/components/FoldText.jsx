@@ -150,7 +150,7 @@ const FoldText = ({
       hoverHandler = () => play(false);
       root.addEventListener('mouseenter', hoverHandler);
     } else if (trigger === 'scroll') {
-      gsap.set(pieces, fromVars);
+      gsap.set(pieces, { opacity: 1, rotateX: 0, rotateY: 0, '--fold-crease': 0, transformOrigin: hingeConfig.origin });
       scrollTrigger = ScrollTrigger.create({
         trigger: root,
         start: 'top 82%',
