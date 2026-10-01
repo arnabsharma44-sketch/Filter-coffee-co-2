@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import ScrollReveal from './ScrollReveal';
+import ScrollFloat from './ScrollFloat';
 
 const teamRoles = [
   'Strategists.',
@@ -58,20 +60,30 @@ export default function Team() {
             <p className="text-[0.68rem] font-bold tracking-widest2 uppercase text-smoke mb-4">
               MEET OUR CEO
             </p>
-            <h2 className="text-[clamp(2.2rem,4vw,4rem)] font-black tracking-tight leading-tight mb-2 text-black">
+            <motion.h2
+              initial={{ clipPath: 'inset(0 0 0 100%)', x: 20 }}
+              animate={inView ? { clipPath: 'inset(0 0 0 0%)', x: 0 } : {}}
+              transition={{ duration: 2.5, delay: 1.2, ease: [0.16,1,0.3,1] }}
+              className="text-[clamp(2.2rem,4vw,4rem)] font-black tracking-tight leading-tight mb-2 text-black w-fit">
               Anuja Deora
-            </h2>
+            </motion.h2>
             <p className="text-smoke text-[0.85rem] font-semibold tracking-wide mb-8 pb-8 border-b border-black/10">
               Founder & CEO, Filter Coffee Co.
             </p>
-            <p className="text-black/80 text-xl italic mb-5 leading-relaxed font-light">
+            <ScrollReveal
+              baseOpacity={0.1} enableBlur baseRotation={0} blurStrength={2}
+              containerClassName="mb-5"
+              textClassName="text-black/80 text-xl italic leading-relaxed font-light"
+            >
               "The mind behind the briefs, the ideas and probably a few too many open tabs."
-            </p>
-            <p className="text-black/70 text-[0.98rem] leading-[1.85] mb-8 font-normal">
-              Anuja built Filter Coffee Co. with a simple belief: creativity should never feel filtered.
-              From building brands to building teams, she leads FCC with a sharp eye for culture,
-              a love for ideas and an instinct for what gets people to stop, look and engage.
-            </p>
+            </ScrollReveal>
+            <ScrollReveal
+              baseOpacity={0.1} enableBlur baseRotation={0} blurStrength={2}
+              containerClassName="mb-8"
+              textClassName="text-black/70 text-[0.98rem] leading-[1.85] font-normal"
+            >
+              Anuja built Filter Coffee Co. with a simple belief: creativity should never feel filtered. From building brands to building teams, she leads FCC with a sharp eye for culture, a love for ideas and an instinct for what gets people to stop, look and engage.
+            </ScrollReveal>
             <div className="flex flex-wrap gap-3">
               {['Big-picture thinker.', 'Brand builder.'].map(t => (
                 <span key={t} className="text-[0.72rem] font-bold tracking-wide glass-pill
@@ -114,20 +126,45 @@ export default function Team() {
 
         {/* Team grid */}
         <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
-          {['Strategist','Copywriter','Designer','Social Media Manager','Content Creator','Tab-Hoarder'].map((role, i) => (
+          {[
+            {
+              role: 'Strategist',
+              img: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=400&q=80&auto=format&fit=crop',
+            },
+            {
+              role: 'Copywriter',
+              img: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&q=80&auto=format&fit=crop',
+            },
+            {
+              role: 'Designer',
+              img: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&q=80&auto=format&fit=crop',
+            },
+            {
+              role: 'Social Media Manager',
+              img: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&q=80&auto=format&fit=crop',
+            },
+            {
+              role: 'Content Creator',
+              img: 'https://images.unsplash.com/photo-1492724441997-5dc865305da7?w=400&q=80&auto=format&fit=crop',
+            },
+            {
+              role: 'Tab-Hoarder',
+              img: 'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80&auto=format&fit=crop',
+            },
+          ].map(({ role, img }, i) => (
             <motion.div key={role}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.06, duration: 0.5 }}
               className="glass-card flex flex-col items-center rounded-2xl overflow-hidden group cursor-none">
-              <div className="w-full aspect-square bg-white/40 flex items-center justify-center
-                border-b border-black/8 relative overflow-hidden">
-                <div className="absolute inset-0" style={{
-                  backgroundImage: 'linear-gradient(rgba(0,0,0,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.02) 1px,transparent 1px)',
-                  backgroundSize: '20px 20px'
-                }} />
-                <span className="text-black/20 text-3xl relative z-10">◈</span>
+              <div className="w-full aspect-square relative overflow-hidden border-b border-black/8">
+                <img
+                  src={img}
+                  alt={role}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300" />
               </div>
               <span className="text-[0.6rem] font-bold tracking-widest uppercase text-black/60 py-4 px-2 text-center">
                 {role}

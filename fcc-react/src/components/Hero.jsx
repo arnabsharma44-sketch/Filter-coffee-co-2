@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*';
@@ -66,16 +67,16 @@ function Sticker({ children, className = '', delay = 0, rotate = 0 }) {
 export default function Hero() {
   return (
     <section id="home"
-      className="relative min-h-screen flex items-center pt-[72px] overflow-hidden bg-white/50">
+      className="relative min-h-screen flex items-center pt-[80px] overflow-hidden bg-brand-light">
 
       {/* Background radial glow */}
-      <div className="absolute top-1/4 right-10 w-[500px] h-[500px] bg-amber-100/40 rounded-full blur-[100px] pointer-events-none -z-10" />
+      <div className="absolute top-1/4 right-10 w-[500px] h-[500px] bg-brand-yellow/20 rounded-full blur-[100px] pointer-events-none -z-10" />
 
       {/* Giant ghost text */}
       <div className="animate-drift absolute -right-16 bottom-0 text-[clamp(180px,26vw,380px)]
-        font-black leading-none select-none pointer-events-none text-transparent opacity-40"
-        style={{ WebkitTextStroke: '1.5px rgba(0,0,0,0.06)', zIndex: 0 }}>
-        FCC
+        font-serif font-black leading-none select-none pointer-events-none text-transparent opacity-20"
+        style={{ WebkitTextStroke: '1.5px rgba(11,19,43,0.1)', zIndex: 0 }}>
+        FCC.
       </div>
 
       {/* Scanline effect */}
@@ -94,16 +95,16 @@ export default function Hero() {
       {/* Floating stickers with glassmorphism */}
       <Sticker delay={1.2} rotate={-12}
         className="absolute top-[20%] right-[8%] md:right-[18%]">
-        <div className="glass-pill text-black text-[0.65rem] font-black uppercase tracking-widest
-          px-4 py-2.5 rounded-2xl shadow-lg border border-black/10">
+        <div className="glass-pill text-brand-navy text-[0.65rem] font-bold uppercase tracking-widest
+          px-4 py-2.5 rounded-2xl shadow-lg border border-brand-navy/10 bg-white">
           ☕ NO COFFEE
         </div>
       </Sticker>
 
       <Sticker delay={1.4} rotate={8}
         className="absolute top-[32%] right-[4%] md:right-[10%]">
-        <div className="glass-card text-black/70 text-[0.6rem] font-mono uppercase
-          tracking-widest px-4 py-2 rounded-xl backdrop-blur-md shadow-md border border-black/10">
+        <div className="glass-card text-brand-navy/80 text-[0.6rem] font-mono uppercase
+          tracking-widest px-4 py-2 rounded-xl backdrop-blur-md shadow-md border border-brand-navy/10 bg-white">
           BRANDS_ADDICTIVE.exe
         </div>
       </Sticker>
@@ -111,8 +112,8 @@ export default function Hero() {
       <Sticker delay={1.6} rotate={-5}
         className="absolute bottom-[25%] right-[12%] hidden md:block">
         <div className="w-24 h-24 rounded-full glass-panel flex items-center
-          justify-center text-center p-2 animate-spin-slow shadow-lg border border-black/10">
-          <span className="text-[0.48rem] tracking-[0.18em] text-black/60 uppercase leading-tight font-bold">
+          justify-center text-center p-2 animate-spin-slow shadow-lg border border-brand-navy/10 bg-brand-yellow/10">
+          <span className="text-[0.48rem] tracking-[0.18em] text-brand-navy/80 uppercase leading-tight font-bold">
             CREATIVITY · NEVER · FILTERED ·
           </span>
         </div>
@@ -123,19 +124,18 @@ export default function Hero() {
         <motion.div variants={stagger} initial="hidden" animate="show">
 
           <motion.p variants={fadeUp}
-            className="flex items-center gap-4 text-[0.7rem] font-bold tracking-widest2
-              uppercase text-smoke mb-6">
-            <span className="w-10 h-px bg-black/30 inline-block" />
+            className="flex items-center gap-4 text-[0.7rem] font-sans font-bold tracking-widest2
+              uppercase text-brand-navy/60 mb-6">
+            <span className="w-10 h-px bg-brand-navy/30 inline-block" />
             Filter Coffee Co.
           </motion.p>
 
           <motion.h1 variants={fadeUp}
-            className="text-[clamp(3.2rem,8.5vw,9rem)] font-black leading-[0.95] tracking-[-0.04em] mb-6 text-black">
+            className="text-[clamp(3.5rem,8.5vw,9.5rem)] font-serif font-black leading-[0.95] tracking-[-0.02em] mb-6 text-brand-navy">
             <span className="block">Espresso</span>
-            <span className="block italic font-extralight text-black/80">Your</span>
+            <span className="block italic font-light text-brand-navy/80">Your</span>
             <span className="block relative">
-              <ScrambleWord text="CREATIVITY" className="hover:text-amber-800 cursor-none transition-colors duration-300" />
-              <span className="absolute -bottom-2 left-0 w-full h-px bg-black/20" />
+              <ScrambleWord text="CREATIVITY" className="hover:text-brand-yellow cursor-none transition-colors duration-300" />
             </span>
           </motion.h1>
 
@@ -147,27 +147,26 @@ export default function Hero() {
               { text: 'We make brands addictive.',          muted: false },
             ].map(({ text, muted }) => (
               <p key={text}
-                className={`text-[clamp(1rem,1.8vw,1.35rem)] tracking-tight
-                  ${muted ? 'text-smoke font-light' : 'text-black font-semibold'}`}>
+                className={`text-[clamp(1rem,1.8vw,1.35rem)] font-sans tracking-tight
+                  ${muted ? 'text-brand-navy/60 font-light' : 'text-brand-navy font-semibold'}`}>
                 {text}
               </p>
             ))}
           </motion.div>
 
-          <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
-            <a href="#work"
-              onClick={e => { e.preventDefault(); document.querySelector('#work')?.scrollIntoView({ behavior:'smooth' }); }}
-              className="mag-btn border border-black bg-black text-white text-[0.75rem] font-bold
-                tracking-widest uppercase px-8 py-4 cursor-none rounded-full shadow-lg hover:bg-black/90">
+          <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4">
+            <Link to="/work"
+              className="mag-btn bg-black text-white text-[0.75rem] font-bold
+                tracking-widest uppercase px-8 py-4 cursor-none rounded-full shadow-lg transition-all duration-300">
               <span>See Our Work</span>
-              <span className="ml-1">↓</span>
-            </a>
-            <a href="#contact"
-              onClick={e => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior:'smooth' }); }}
-              className="glass-button text-black text-[0.72rem] font-semibold tracking-wide border
-                border-black/20 px-6 py-4 rounded-full hover:border-black transition-colors cursor-none self-end">
-              or grab a coffee →
-            </a>
+              <span className="ml-1">→</span>
+            </Link>
+            <Link to="/contact"
+              className="mag-btn border border-black/20 bg-transparent text-black text-[0.75rem] font-bold tracking-widest uppercase
+                px-6 py-4 rounded-full transition-colors cursor-none self-end">
+              <span>GRAB A COFFEE</span>
+              <span className="ml-1">→</span>
+            </Link>
           </motion.div>
         </motion.div>
       </div>

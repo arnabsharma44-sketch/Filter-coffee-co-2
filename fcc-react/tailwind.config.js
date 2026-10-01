@@ -6,6 +6,7 @@ export default {
       fontFamily: {
         sans: ['"SF Pro Display"', '"SF Pro Text"', '"Inter"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         mono: ['"SF Mono"', 'monospace'],
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
       },
       colors: {
         white:  '#ffffff',
@@ -15,6 +16,11 @@ export default {
         smoke:  '#666666',
         ash:    '#27272a',
         border: 'rgba(0,0,0,0.08)',
+        // Premium Theme Colors based on reference
+        'brand-yellow': '#FFD400', // Vibrant Whatsyellow yellow
+        'brand-navy': '#111111',   // Deep dark charcoal
+        'brand-cream': '#F4F4F4',
+        'brand-light': '#FAFAFA',
       },
       letterSpacing: {
         widest2: '0.22em',
