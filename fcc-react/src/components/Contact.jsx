@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import ScrollFloat from './ScrollFloat';
 
 const OPTIONS = [
   { value: 'social',      label: 'Social Media' },
@@ -60,10 +61,18 @@ export default function Contact() {
             GOT A BRIEF?
           </p>
 
-          <h2 className="text-[clamp(2.8rem,6vw,6.5rem)] font-black leading-[1] tracking-tight text-black mb-6">
-            Spill the beans.<br />
-            <em className="font-extralight italic text-black/70">We'll brew the idea.</em>
-          </h2>
+          <ScrollFloat
+            animationDuration={3}
+            textClassName="text-[clamp(2.8rem,6vw,6.5rem)] font-black leading-[1] tracking-tight text-black mb-6"
+          >
+            Spill the beans.
+          </ScrollFloat>
+          <ScrollFloat
+            animationDuration={3}
+            textClassName="text-[clamp(2.8rem,6vw,6.5rem)] font-extralight italic text-black/70 leading-[1] tracking-tight mb-6"
+          >
+            We'll brew the idea.
+          </ScrollFloat>
 
           <p className="text-smoke text-base max-w-lg mx-auto leading-relaxed mb-10 font-medium">
             New campaign? Social needs a refresh? Launch loading? Or just an idea sitting in your notes app?
@@ -72,7 +81,7 @@ export default function Contact() {
 
           <a href="mailto:hello@filtercoffeeco.in"
             className="mag-btn border border-black bg-black text-white text-[0.78rem] font-black
-              tracking-widest uppercase px-12 py-5 cursor-none mx-auto rounded-full shadow-lg hover:bg-black/90 inline-flex">
+              tracking-widest uppercase px-12 py-5 cursor-none mx-auto rounded-full shadow-lg inline-flex">
             <span>SEND THE BRIEF</span>
             <span className="ml-2">→</span>
           </a>
@@ -140,7 +149,7 @@ export default function Contact() {
                 uppercase py-5 justify-center transition-all rounded-full shadow-md
                 ${status === 'success'
                   ? 'bg-emerald-600 border-emerald-600 text-white cursor-not-allowed'
-                  : 'bg-black border-black text-white cursor-none hover:bg-black/90'}`}>
+                  : 'bg-black border-black text-white cursor-none'}`}>
               <span>
                 {status === 'success' ? '☕ BRIEF RECEIVED. WE\'RE BREWING.' : 'BREW IT UP →'}
               </span>
