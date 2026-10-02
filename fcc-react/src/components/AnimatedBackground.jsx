@@ -1,0 +1,84 @@
+import { motion } from 'framer-motion';
+
+export default function AnimatedBackground() {
+  return (
+    <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-white">
+
+      {/* Light subtle grid pattern */}
+      <div className="absolute inset-0 opacity-30"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(0,0,0,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.03) 1px,transparent 1px)',
+          backgroundSize: '60px 60px'
+        }} />
+
+      {/* ── Large soft patch 1 — Pastel Sky Blue (top-right) ── */}
+      <motion.div
+        className="absolute -top-[20%] -right-[15%] w-[75vw] h-[75vw] rounded-[50%] opacity-35"
+        style={{
+          background: 'radial-gradient(ellipse at center, rgba(147,197,253,0.9) 0%, rgba(196,181,253,0.5) 50%, transparent 75%)',
+          filter: 'blur(80px)',
+        }}
+        animate={{
+          x: [0, -60, 30, 0],
+          y: [0, 60, -30, 0],
+          scaleX: [1, 1.15, 0.95, 1],
+          scaleY: [1, 0.9, 1.1, 1],
+          rotate: [0, 25, -15, 0],
+        }}
+        transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
+      />
+
+      {/* ── Large soft patch 2 — Warm Peach/Cream (bottom-left) ── */}
+      <motion.div
+        className="absolute -bottom-[20%] -left-[15%] w-[70vw] h-[70vw] rounded-[50%] opacity-30"
+        style={{
+          background: 'radial-gradient(ellipse at center, rgba(254,215,170,0.95) 0%, rgba(253,186,116,0.4) 45%, transparent 75%)',
+          filter: 'blur(90px)',
+        }}
+        animate={{
+          x: [0, 70, -40, 0],
+          y: [0, -50, 30, 0],
+          scaleX: [1, 0.9, 1.15, 1],
+          scaleY: [1, 1.1, 0.92, 1],
+          rotate: [0, -20, 10, 0],
+        }}
+        transition={{ duration: 26, repeat: Infinity, ease: 'easeInOut' }}
+      />
+
+      {/* ── Large soft patch 3 — Soft Pink-Lavender (center-left) ── */}
+      <motion.div
+        className="absolute top-[20%] -left-[10%] w-[55vw] h-[55vw] rounded-[50%] opacity-25"
+        style={{
+          background: 'radial-gradient(ellipse at center, rgba(249,168,212,0.85) 0%, rgba(216,180,254,0.45) 50%, transparent 75%)',
+          filter: 'blur(100px)',
+        }}
+        animate={{
+          x: [0, 80, -30, 0],
+          y: [0, -60, 40, 0],
+          scaleX: [1, 1.2, 0.88, 1],
+          scaleY: [1, 0.85, 1.12, 1],
+          rotate: [0, 30, -20, 0],
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
+      />
+
+      {/* ── Subtle Accent — Blue-Purple tint (top-left corner) ── */}
+      <motion.div
+        className="absolute -top-[10%] -left-[10%] w-[45vw] h-[45vw] rounded-[50%] opacity-20"
+        style={{
+          background: 'radial-gradient(ellipse at center, rgba(165,180,252,0.9) 0%, rgba(196,181,253,0.4) 50%, transparent 75%)',
+          filter: 'blur(80px)',
+        }}
+        animate={{
+          x: [0, 50, -20, 0],
+          y: [0, 40, -25, 0],
+          scaleX: [1, 1.1, 0.92, 1],
+          scaleY: [1, 0.9, 1.08, 1],
+          rotate: [0, -25, 15, 0],
+        }}
+        transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+      />
+
+    </div>
+  );
+}

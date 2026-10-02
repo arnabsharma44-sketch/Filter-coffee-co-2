@@ -67,7 +67,7 @@ function Sticker({ children, className = '', delay = 0, rotate = 0 }) {
 export default function Hero() {
   return (
     <section id="home"
-      className="relative min-h-screen flex items-center pt-[80px] overflow-hidden bg-brand-light">
+      className="relative min-h-screen flex items-center pt-[80px] overflow-hidden bg-transparent">
 
       {/* Background radial glow */}
       <div className="absolute top-1/4 right-10 w-[500px] h-[500px] bg-brand-yellow/20 rounded-full blur-[100px] pointer-events-none -z-10" />

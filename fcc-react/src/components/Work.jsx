@@ -87,7 +87,7 @@ export default function Work({ hideHeader = false }) {
   const [ref, inView] = useInView({ threshold: 0.05, triggerOnce: true });
 
   return (
-    <section id="work" className="py-[120px] border-b border-black/10 relative z-10 backdrop-blur-md" style={{ backgroundColor: 'rgba(207, 235, 255, 0.4)' }}>
+    <section id="work" className="py-[120px] border-b border-black/10 relative z-10 backdrop-blur-sm bg-white/40">
       <div className="max-w-[1360px] mx-auto px-8 md:px-12">
 
         {/* Header */}

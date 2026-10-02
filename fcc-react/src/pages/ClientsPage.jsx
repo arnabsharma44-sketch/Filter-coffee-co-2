@@ -30,7 +30,7 @@ export default function ClientsPage() {
   return (
     <>
       {/* Page Hero */}
-      <section className="relative pt-[140px] pb-[80px] overflow-hidden bg-brand-light">
+      <section className="relative pt-[140px] pb-[80px] overflow-hidden bg-transparent">
         <div className="absolute inset-0 pointer-events-none"
           style={{
             backgroundImage: 'linear-gradient(rgba(0,0,0,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.03) 1px,transparent 1px)',
@@ -59,7 +59,7 @@ export default function ClientsPage() {
       </section>
 
       {/* Clients Grid */}
-      <section className="py-[120px] border-b border-black/10 bg-white/50 relative z-10">
+      <section className="py-[120px] border-b border-black/10 bg-transparent relative z-10">
         <div className="max-w-[1360px] mx-auto px-8 md:px-12">
           <LogoGrid />
         </div>
