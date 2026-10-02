@@ -56,7 +56,7 @@ export default function Footer() {
       <div className="max-w-[1360px] mx-auto px-8 md:px-12 pt-16 pb-10">
         <div className="grid md:grid-cols-3 gap-12 mb-14">
           <div>
-            <Link to="/" className="text-3xl font-black tracking-widest block mb-3 text-black hover:opacity-60 transition-opacity">FCC</Link>
+            <Link to="/" className="text-3xl font-black tracking-widest block mb-3 text-black hover:opacity-60 transition-opacity">FILTER COFFEE CO.</Link>
             <p className="text-smoke text-sm italic font-medium">We make brands addictive.</p>
           </div>
           <nav className="flex flex-col gap-3">
