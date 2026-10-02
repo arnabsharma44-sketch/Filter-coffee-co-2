@@ -67,7 +67,7 @@ function Sticker({ children, className = '', delay = 0, rotate = 0 }) {
 export default function Hero() {
   return (
     <section id="home"
-      className="relative min-h-screen flex items-center pt-[80px] overflow-hidden bg-transparent">
+      className="relative min-h-screen flex items-center pt-[90px] overflow-hidden bg-transparent">
 
       {/* Background radial glow */}
       <div className="absolute top-1/4 right-10 w-[500px] h-[500px] bg-brand-yellow/20 rounded-full blur-[100px] pointer-events-none -z-10" />
@@ -111,11 +111,24 @@ export default function Hero() {
 
       <Sticker delay={1.6} rotate={-5}
         className="absolute bottom-[25%] right-[12%] hidden md:block">
-        <div className="w-24 h-24 rounded-full glass-panel flex items-center
-          justify-center text-center p-2 animate-spin-slow shadow-lg border border-brand-navy/10 bg-brand-yellow/10">
-          <span className="text-[0.48rem] tracking-[0.18em] text-brand-navy/80 uppercase leading-tight font-bold">
-            CREATIVITY · NEVER · FILTERED ·
-          </span>
+        <div className="w-[120px] h-[120px] rounded-2xl bg-white flex flex-col items-start
+          justify-between p-4 shadow-lg border border-black/8 relative">
+          <div className="flex flex-col gap-0.5">
+            <span className="text-[0.55rem] tracking-[0.22em] text-black/90 uppercase font-bold leading-tight block">
+              FILTER
+            </span>
+            <span className="text-[0.55rem] tracking-[0.22em] text-black/90 uppercase font-bold leading-tight block">
+              COFFEE
+            </span>
+            <span className="text-[0.55rem] tracking-[0.22em] text-black/90 uppercase font-bold leading-tight block">
+              CO.
+            </span>
+          </div>
+          <div className="absolute bottom-3 right-3 w-7 h-7 rounded-full bg-black/10 border border-black/15 flex items-center justify-center">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 9L9 1M9 1H3M9 1V7" stroke="black" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
         </div>
       </Sticker>
 

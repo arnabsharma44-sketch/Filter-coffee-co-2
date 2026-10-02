@@ -7,6 +7,7 @@ export default {
         sans: ['"SF Pro Display"', '"SF Pro Text"', '"Inter"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         mono: ['"SF Mono"', 'monospace'],
         serif: ['"Playfair Display"', 'Georgia', 'serif'],
+        nunito: ['"Nunito"', 'sans-serif'],
       },
       colors: {
         white:  '#ffffff',
