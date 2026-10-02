@@ -46,7 +46,7 @@ export default function Contact() {
 
   return (
     <section id="contact"
-      className="py-[120px] border-b border-black/10 bg-white/70 relative z-10"
+      className="py-[120px] border-b border-black/10 bg-white/10 backdrop-blur-sm relative z-10"
       ref={ref}>
       <div className="max-w-[900px] mx-auto px-8 md:px-12">
 

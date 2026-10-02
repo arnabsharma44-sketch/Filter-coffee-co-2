@@ -100,7 +100,7 @@ export default function Services({ hideHeader = false }) {
   const [ref, inView] = useInView({ threshold: 0.05, triggerOnce: true });
 
   return (
-    <section id="services" className="py-[120px] border-b border-black/10 bg-white/70 relative z-10">
+    <section id="services" className="py-[120px] border-b border-black/10 bg-white/10 backdrop-blur-sm relative z-10">
       <div className="max-w-[1360px] mx-auto px-8 md:px-12">
 
         {/* Header */}

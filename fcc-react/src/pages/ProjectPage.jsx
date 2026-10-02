@@ -94,7 +94,7 @@ export default function ProjectPage() {
 
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-brand-light">
+      <div className="min-h-screen flex items-center justify-center bg-transparent">
         <div className="text-center">
           <h1 className="text-4xl font-black text-brand-navy mb-4">Project not found</h1>
           <Link to="/work" className="text-smoke font-semibold underline">Back to Work</Link>
@@ -104,7 +104,7 @@ export default function ProjectPage() {
   }
 
   return (
-    <div className="min-h-screen bg-brand-light">
+    <div className="min-h-screen bg-transparent">
       {/* Hero */}
       <div className="relative h-[70vh] overflow-hidden">
         <motion.img

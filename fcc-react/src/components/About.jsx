@@ -81,7 +81,7 @@ export default function About({ hideHeader = false }) {
   return (
     <>
       {/* ── ABOUT / OUR BLEND ── */}
-      <section id="about" className="py-[120px] border-b border-black/10 bg-white/50 relative z-10">
+      <section id="about" className="py-[120px] border-b border-black/10 bg-transparent relative z-10">
         <div className="max-w-[1360px] mx-auto px-8 md:px-12">
           {!hideHeader && (
           <motion.div ref={hRef}
@@ -120,7 +120,7 @@ export default function About({ hideHeader = false }) {
       </section>
 
       {/* ── STATS ── */}
-      <section ref={sRef} className="py-[120px] border-b border-black/10 bg-white/70 relative z-10">
+      <section ref={sRef} className="py-[120px] border-b border-black/10 bg-transparent relative z-10">
         <div className="max-w-[1360px] mx-auto px-8 md:px-12 mb-16">
           <motion.div
             initial={{ opacity: 0, y: 40 }}

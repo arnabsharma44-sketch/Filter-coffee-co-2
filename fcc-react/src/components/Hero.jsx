@@ -67,7 +67,7 @@ function Sticker({ children, className = '', delay = 0, rotate = 0 }) {
 export default function Hero() {
   return (
     <section id="home"
-      className="relative min-h-screen flex items-center pt-[80px] overflow-hidden bg-brand-light">
+      className="relative min-h-screen flex items-center pt-[80px] overflow-hidden bg-transparent">
 
       {/* Background radial glow */}
       <div className="absolute top-1/4 right-10 w-[500px] h-[500px] bg-brand-yellow/20 rounded-full blur-[100px] pointer-events-none -z-10" />
@@ -141,17 +141,15 @@ export default function Hero() {
 
           <motion.div variants={fadeUp}
             className="mt-10 mb-12 space-y-2">
-            {[
-              { text: 'Yes, our name is Filter Coffee Co.', muted: true },
-              { text: "No, we don't make coffee.",          muted: true },
-              { text: 'We make brands addictive.',          muted: false },
-            ].map(({ text, muted }) => (
-              <p key={text}
-                className={`text-[clamp(1rem,1.8vw,1.35rem)] font-sans tracking-tight
-                  ${muted ? 'text-brand-navy/60 font-light' : 'text-brand-navy font-semibold'}`}>
-                {text}
-              </p>
-            ))}
+            <p className="text-[clamp(1rem,1.8vw,1.35rem)] font-sans tracking-tight text-brand-navy/60 font-light">
+              Yes, our name is <span className="font-bold underline underline-offset-4 text-brand-navy">Filter Coffee Co.</span>
+            </p>
+            <p className="text-[clamp(1rem,1.8vw,1.35rem)] font-sans tracking-tight text-brand-navy/60 font-light">
+              No, we don't make coffee.
+            </p>
+            <p className="text-[clamp(1rem,1.8vw,1.35rem)] font-sans tracking-tight text-brand-navy font-semibold">
+              We make brands addictive.
+            </p>
           </motion.div>
 
           <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4">

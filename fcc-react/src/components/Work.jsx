@@ -13,14 +13,14 @@ const works = [
 ];
 
 function WorkCard({ tag, label, cls, image, slug, index }) {
-  const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
+  const [ref, inView] = useInView({ threshold: 0.1 });
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay: index * 0.08, ease: [0.16,1,0.3,1] }}
+      initial={{ opacity: 0, x: [0, 2, 5].includes(index) ? -100 : 100 }}
+      animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: [0, 2, 5].includes(index) ? -100 : 100 }}
+      transition={{ duration: 0.8, delay: inView ? 0.2 + (index * 0.2) : 0, ease: [0.16,1,0.3,1] }}
       className={`work-card glass-card noise-card group relative overflow-hidden rounded-2xl cursor-none ${cls}`}>
 
       <div className="w-full h-full min-h-[220px] flex items-center justify-center relative p-6">
@@ -87,7 +87,7 @@ export default function Work({ hideHeader = false }) {
   const [ref, inView] = useInView({ threshold: 0.05, triggerOnce: true });
 
   return (
-    <section id="work" className="py-[120px] border-b border-black/10 bg-white/50 relative z-10">
+    <section id="work" className="py-[120px] border-b border-black/10 relative z-10 backdrop-blur-sm bg-white/40">
       <div className="max-w-[1360px] mx-auto px-8 md:px-12">
 
         {/* Header */}
