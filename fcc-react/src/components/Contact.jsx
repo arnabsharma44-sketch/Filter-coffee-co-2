@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import ScrollFloat from './ScrollFloat';
+import BackgroundShapes from './BackgroundShapes';
 
 const OPTIONS = [
   { value: 'social',      label: 'Social Media' },
@@ -48,6 +49,7 @@ export default function Contact() {
     <section id="contact"
       className="py-[120px] border-b border-black/10 bg-white/10 backdrop-blur-sm relative z-10"
       ref={ref}>
+      <BackgroundShapes variant="contact" />
       <div className="max-w-[900px] mx-auto px-8 md:px-12">
 
         {/* Header */}

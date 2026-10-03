@@ -5,6 +5,7 @@ import Services from '../components/Services';
 import About    from '../components/About';
 import Team     from '../components/Team';
 import Contact  from '../components/Contact';
+import BackgroundShapes from '../components/BackgroundShapes';
 
 import ScrollReveal from '../components/ScrollReveal';
 
@@ -12,6 +13,7 @@ import ScrollReveal from '../components/ScrollReveal';
 function Blurb() {
   return (
     <section className="py-[90px] md:py-[120px] bg-brand-navy relative z-10">
+      <BackgroundShapes variant="blurb" />
       <div className="max-w-[1360px] mx-auto px-8 md:px-12">
         <div className="p-10 md:p-16 rounded-3xl relative overflow-hidden">
           <ScrollReveal

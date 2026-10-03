@@ -3,12 +3,14 @@ import About from '../components/About';
 import Team from '../components/Team';
 import Contact from '../components/Contact';
 import ScrollReveal from '../components/ScrollReveal';
+import BackgroundShapes from '../components/BackgroundShapes';
 
 export default function AboutPage() {
   return (
     <>
       {/* Page Hero */}
       <section className="relative pt-[140px] pb-[80px] overflow-hidden bg-transparent">
+        <BackgroundShapes variant="about" />
         <div className="absolute inset-0 pointer-events-none"
           style={{
             backgroundImage: 'linear-gradient(rgba(0,0,0,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.03) 1px,transparent 1px)',

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import ScrollFloat from './ScrollFloat';
+import BackgroundShapes from './BackgroundShapes';
 
 const services = [
   {
@@ -128,6 +129,7 @@ export default function Services({ hideHeader = false }) {
 
   return (
     <section id="services" className="py-[120px] border-b border-black/10 bg-white/10 backdrop-blur-sm relative z-10">
+      <BackgroundShapes variant="services" />
       <div className="max-w-[1360px] mx-auto px-8 md:px-12">
 
         {/* Header */}

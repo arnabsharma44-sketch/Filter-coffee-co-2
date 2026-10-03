@@ -20,8 +20,8 @@ export default {
         // Premium Theme Colors based on reference
         'brand-yellow': '#FFD400', // Vibrant Whatsyellow yellow
         'brand-navy': '#111111',   // Deep dark charcoal
-        'brand-cream': '#F4F4F4',
-        'brand-light': '#FAFAFA',
+        'brand-cream': '#EDEDEB',
+        'brand-light': '#F0EFEC',
       },
       letterSpacing: {
         widest2: '0.22em',
