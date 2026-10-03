@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import ScrollReveal from './ScrollReveal';
 import ScrollFloat from './ScrollFloat';
+import BackgroundShapes from './BackgroundShapes';
 
 const teamRoles = [
   'Strategists.',
@@ -17,6 +18,7 @@ export default function Team() {
 
   return (
     <section className="py-[120px] border-b border-black/10 bg-white/10 backdrop-blur-sm relative z-10" ref={ref}>
+      <BackgroundShapes variant="team" />
       <div className="max-w-[1360px] mx-auto px-8 md:px-12">
 
         {/* CEO */}

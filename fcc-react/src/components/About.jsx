@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import ScrollFloat from './ScrollFloat';
 import CountUp from './CountUp';
+import BackgroundShapes from './BackgroundShapes';
 
 const CLIENTS = Array.from({ length: 12 }, (_, i) => `Brand ${String(i+1).padStart(2,'0')}`);
 
@@ -82,6 +83,7 @@ export default function About({ hideHeader = false }) {
     <>
       {/* ── ABOUT / OUR BLEND ── */}
       <section id="about" className="py-[120px] border-b border-black/10 bg-transparent relative z-10">
+        <BackgroundShapes variant="about" />
         <div className="max-w-[1360px] mx-auto px-8 md:px-12">
           {!hideHeader && (
           <motion.div ref={hRef}

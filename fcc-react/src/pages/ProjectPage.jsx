@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import BackgroundShapes from '../components/BackgroundShapes';
 
 const projects = {
   'brand-story': {
@@ -104,7 +105,8 @@ export default function ProjectPage() {
   }
 
   return (
-    <div className="min-h-screen bg-transparent">
+    <div className="min-h-screen bg-transparent relative">
+      <BackgroundShapes variant="project" />
       {/* Hero */}
       <div className="relative h-[70vh] overflow-hidden">
         <motion.img

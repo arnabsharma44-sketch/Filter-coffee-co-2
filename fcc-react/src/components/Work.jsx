@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
 import ScrollFloat from './ScrollFloat';
+import BackgroundShapes from './BackgroundShapes';
 
 const works = [
   { tag: 'Campaign',   label: 'Brand Story',          cls: 'span2',     slug: 'brand-story',          image: 'https://picsum.photos/seed/campaign/800/500' },
@@ -88,6 +89,7 @@ export default function Work({ hideHeader = false }) {
 
   return (
     <section id="work" className="py-[120px] border-b border-black/10 relative z-10 backdrop-blur-sm bg-white/40">
+      <BackgroundShapes variant="work" />
       <div className="max-w-[1360px] mx-auto px-8 md:px-12">
 
         {/* Header */}

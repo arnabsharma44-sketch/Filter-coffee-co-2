@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import BackgroundShapes from './BackgroundShapes';
 
 const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*';
 
@@ -68,6 +69,8 @@ export default function Hero() {
   return (
     <section id="home"
       className="relative min-h-screen flex items-center pt-[90px] overflow-hidden bg-transparent">
+
+      <BackgroundShapes variant="hero" />
 
       {/* Background radial glow */}
       <div className="absolute top-1/4 right-10 w-[500px] h-[500px] bg-brand-yellow/20 rounded-full blur-[100px] pointer-events-none -z-10" />
