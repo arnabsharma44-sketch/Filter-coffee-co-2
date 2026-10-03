@@ -1,8 +1,27 @@
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 export default function AnimatedBackground() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Detect touch / small screens once on mount
+    const mq = window.matchMedia('(max-width: 768px)');
+    setIsMobile(mq.matches || 'ontouchstart' in window);
+    const handler = (e) => setIsMobile(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
+  // On mobile: just a solid background — no animated blobs, no blur filters
+  if (isMobile) {
+    return (
+      <div className="fixed inset-0 pointer-events-none -z-10 bg-brand-light" />
+    );
+  }
+
   return (
-    <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-white">
+    <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-brand-light">
 
       {/* Light subtle grid pattern */}
       <div className="absolute inset-0 opacity-30"
@@ -17,6 +36,7 @@ export default function AnimatedBackground() {
         style={{
           background: 'radial-gradient(ellipse at center, rgba(147,197,253,0.9) 0%, rgba(196,181,253,0.5) 50%, transparent 75%)',
           filter: 'blur(80px)',
+          willChange: 'transform',
         }}
         animate={{
           x: [0, -60, 30, 0],
@@ -34,6 +54,7 @@ export default function AnimatedBackground() {
         style={{
           background: 'radial-gradient(ellipse at center, rgba(254,215,170,0.95) 0%, rgba(253,186,116,0.4) 45%, transparent 75%)',
           filter: 'blur(90px)',
+          willChange: 'transform',
         }}
         animate={{
           x: [0, 70, -40, 0],
@@ -51,6 +72,7 @@ export default function AnimatedBackground() {
         style={{
           background: 'radial-gradient(ellipse at center, rgba(249,168,212,0.85) 0%, rgba(216,180,254,0.45) 50%, transparent 75%)',
           filter: 'blur(100px)',
+          willChange: 'transform',
         }}
         animate={{
           x: [0, 80, -30, 0],
@@ -68,6 +90,7 @@ export default function AnimatedBackground() {
         style={{
           background: 'radial-gradient(ellipse at center, rgba(165,180,252,0.9) 0%, rgba(196,181,253,0.4) 50%, transparent 75%)',
           filter: 'blur(80px)',
+          willChange: 'transform',
         }}
         animate={{
           x: [0, 50, -20, 0],
