@@ -5,7 +5,6 @@ export default function AnimatedBackground() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Detect touch / small screens once on mount
     const mq = window.matchMedia('(max-width: 768px)');
     setIsMobile(mq.matches || 'ontouchstart' in window);
     const handler = (e) => setIsMobile(e.matches);
@@ -13,15 +12,45 @@ export default function AnimatedBackground() {
     return () => mq.removeEventListener('change', handler);
   }, []);
 
-  // On mobile: just a solid background — no animated blobs, no blur filters
+  // On mobile: static gradient patches — no animation, no blur filters, but
+  // colors are mixed from all corners so it doesn't look flat/yellow
   if (isMobile) {
     return (
-      <div className="fixed inset-0 pointer-events-none -z-10 bg-brand-light" />
+      <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden" style={{ background: '#EAE9E6' }}>
+        {/* Cool blue-lavender — top right */}
+        <div
+          className="absolute -top-[10%] -right-[15%] w-[70vw] h-[70vw] rounded-full"
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(147,197,253,0.35) 0%, rgba(196,181,253,0.2) 40%, transparent 70%)',
+          }}
+        />
+        {/* Warm peach — bottom left */}
+        <div
+          className="absolute -bottom-[10%] -left-[15%] w-[65vw] h-[65vw] rounded-full"
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(254,215,170,0.3) 0%, rgba(253,186,116,0.15) 40%, transparent 70%)',
+          }}
+        />
+        {/* Soft pink — center left */}
+        <div
+          className="absolute top-[30%] -left-[10%] w-[50vw] h-[50vw] rounded-full"
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(249,168,212,0.2) 0%, rgba(216,180,254,0.12) 40%, transparent 70%)',
+          }}
+        />
+        {/* Blue-purple — top left */}
+        <div
+          className="absolute -top-[5%] -left-[10%] w-[45vw] h-[45vw] rounded-full"
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(165,180,252,0.25) 0%, rgba(196,181,253,0.12) 40%, transparent 70%)',
+          }}
+        />
+      </div>
     );
   }
 
   return (
-    <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-brand-light">
+    <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden" style={{ background: '#EAE9E6' }}>
 
       {/* Light subtle grid pattern */}
       <div className="absolute inset-0 opacity-30"
