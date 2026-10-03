@@ -39,14 +39,22 @@ const services = [
 
 function ServiceCard({ svc, index }) {
   const [hovered, setHovered] = useState(false);
-  const [ref, inView] = useInView({ threshold: 0.08, triggerOnce: true });
+  const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
+
+  /* Stagger: col 0 → delay 0, col 1 → delay 0.12s, col 2 → delay 0.24s */
+  const col = index % 3;
+  const staggerDelay = col * 0.12 + Math.floor(index / 3) * 0.06;
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 32 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay: index * 0.07, ease: [0.16,1,0.3,1] }}
+      initial={{ opacity: 0, y: 60, scale: 0.94 }}
+      animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{
+        duration: 0.75,
+        delay: staggerDelay,
+        ease: [0.22, 1, 0.36, 1],
+      }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="service-card glass-card noise-card group relative rounded-3xl p-8 cursor-none
@@ -74,24 +82,43 @@ function ServiceCard({ svc, index }) {
         <p className="text-smoke text-sm italic mb-6">{svc.tagline}</p>
 
         <ul className="space-y-2 mb-8">
-          {svc.tags.map(t => (
-            <li key={t} className="text-[0.78rem] text-black/70 flex items-center gap-2 font-medium">
+          {svc.tags.map((t, ti) => (
+            <motion.li
+              key={t}
+              initial={{ opacity: 0, x: -10 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{
+                duration: 0.4,
+                delay: staggerDelay + 0.25 + ti * 0.06,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="text-[0.78rem] text-black/70 flex items-center gap-2 font-medium"
+            >
               <span className="w-3 h-px bg-black/30 inline-block" />
               {t}
-            </li>
+            </motion.li>
           ))}
         </ul>
       </div>
 
       {/* Visual */}
-      <div className="w-full aspect-video rounded-xl overflow-hidden relative border border-black/10">
-        <img 
-          src={svc.img} 
-          alt={svc.title} 
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+      <motion.div
+        className="w-full aspect-video rounded-xl overflow-hidden relative border border-black/10"
+        initial={{ opacity: 0, scale: 0.96 }}
+        animate={inView ? { opacity: 1, scale: 1 } : {}}
+        transition={{
+          duration: 0.6,
+          delay: staggerDelay + 0.3,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+      >
+        <img
+          src={svc.img}
+          alt={svc.title}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500" />
-      </div>
+      </motion.div>
     </motion.div>
   );
 }
