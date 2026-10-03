@@ -7,21 +7,36 @@ const CLIENTS = Array.from({ length: 12 }, (_, i) => `Brand ${String(i+1).padSta
 
 function LogoGrid() {
   const [ref, inView] = useInView({ threshold: 0.05, triggerOnce: true });
+
+  /* 12 cards spread over 3s — each card's delay = i * (3s / 12) = i * 0.25s
+     But we use a shorter individual duration so they feel snappy,
+     while the stagger creates the 3s left-to-right wave effect. */
+  const total = CLIENTS.length;
+  const totalDuration = 3; // seconds to reveal all cards
+
   return (
     <div ref={ref} className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-      {CLIENTS.map((name, i) => (
-        <motion.div
-          key={name}
-          initial={{ opacity: 0, y: 15 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: i * 0.04, duration: 0.5 }}
-          className="logo-slot glass-card aspect-[3/2] flex items-center justify-center p-5 cursor-none rounded-2xl">
-          <span className="text-[0.68rem] font-bold tracking-widest uppercase text-brand-navy/50
-            transition-all duration-300 group-hover:text-brand-navy">
-            {name}
-          </span>
-        </motion.div>
-      ))}
+      {CLIENTS.map((name, i) => {
+        const delay = (i / (total - 1)) * totalDuration * 0.65; // spread across ~2s, last card at 2s
+        return (
+          <motion.div
+            key={name}
+            initial={{ opacity: 0, x: -50 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{
+              delay,
+              duration: 0.55,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="logo-slot glass-card aspect-[3/2] flex items-center justify-center p-5 cursor-none rounded-2xl"
+          >
+            <span className="text-[0.68rem] font-bold tracking-widest uppercase text-brand-navy/50
+              transition-all duration-300 group-hover:text-brand-navy">
+              {name}
+            </span>
+          </motion.div>
+        );
+      })}
     </div>
   );
 }
