@@ -5,6 +5,13 @@ export default function Cursor() {
   const ring = useRef(null);
 
   useEffect(() => {
+    // Don't run the cursor on touch devices at all
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+      // Restore default cursor for touch
+      document.body.style.cursor = 'auto';
+      return;
+    }
+
     let mx = window.innerWidth / 2, my = window.innerHeight / 2;
     let rx = mx, ry = my;
     let raf;
@@ -41,6 +48,11 @@ export default function Cursor() {
       cancelAnimationFrame(raf);
     };
   }, []);
+
+  // Don't render cursor elements on touch devices
+  if (typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
+    return null;
+  }
 
   return (
     <>

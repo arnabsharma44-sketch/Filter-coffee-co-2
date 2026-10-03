@@ -1,8 +1,50 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import ScrollReveal from '../components/ScrollReveal';
 import Masonry from '../components/Masonry';
-import FlipCard from '../components/FlipCard';
 import BackgroundShapes from '../components/BackgroundShapes';
+
+/* Lightweight CSS-only flip card for mobile */
+function MobileFlipCard({ img, title, description }) {
+  const [flipped, setFlipped] = useState(false);
+  return (
+    <div
+      className="mobile-flip-card flex-shrink-0 w-[220px] h-[340px] rounded-2xl shadow-lg"
+      style={{ scrollSnapAlign: 'start', perspective: '900px' }}
+      onClick={() => setFlipped(f => !f)}
+    >
+      <div
+        className="mobile-flip-inner w-full h-full relative"
+        style={{
+          transformStyle: 'preserve-3d',
+          transition: 'transform 0.5s ease',
+          transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+        }}
+      >
+        {/* Front */}
+        <div className="absolute inset-0 rounded-2xl overflow-hidden" style={{ backfaceVisibility: 'hidden' }}>
+          <img src={img} alt={title} className="w-full h-full object-cover" loading="lazy" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 p-4">
+            <span className="inline-block bg-white/15 text-white/90 text-[0.55rem] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider border border-white/10 mb-2">
+              {title.split(' ')[0]}
+            </span>
+            <h3 className="text-white text-sm font-bold leading-tight">{title}</h3>
+          </div>
+        </div>
+        {/* Back */}
+        <div
+          className="absolute inset-0 rounded-2xl bg-[#1a1a1a] flex flex-col items-center justify-center p-6 text-center"
+          style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+        >
+          <h3 className="text-white text-[1.15rem] font-black leading-tight mb-3">{title}</h3>
+          <p className="text-white/60 text-[0.75rem] leading-relaxed">{description}</p>
+          <span className="mt-4 text-white/30 text-[0.55rem] uppercase tracking-widest font-bold">Tap to flip back</span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const galleryItems = [
   {
@@ -158,69 +200,39 @@ export default function GalleryPage() {
 
         {/* Mobile View: Horizontal Scroll */}
         <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
           className="block md:hidden w-full relative"
         >
-          <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 px-4 pb-10 hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          <div
+            className="flex gap-4 px-4 pb-6 overflow-x-auto"
+            style={{
+              scrollSnapType: 'x mandatory',
+              WebkitOverflowScrolling: 'touch',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+            }}
+          >
             {galleryItems.map((item) => (
-              <div key={item.id} className="snap-center shrink-0 w-[260px] h-[400px]">
-                <FlipCard
-                  width="100%"
-                  height="100%"
-                  radius={16}
-                  stiffness={80}
-                  damping={14}
-                  flipOnClick
-                  draggable={false}
-                  tilt
-                  tiltMax={8}
-                  glare
-                  glareOpacity={0.18}
-                  hoverScale={1.0}
-                  perspective={1200}
-                  background="#1a1a1a"
-                  color="#ffffff"
-                  shadow
-                  shadowOpacity={0.3}
-                  front={
-                    <div className="relative w-full h-full rounded-[16px] overflow-hidden">
-                      <img
-                        src={item.img}
-                        alt={item.title ?? ''}
-                        className="w-full h-full object-cover pointer-events-none"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
-                      <div className="absolute bottom-4 left-4 pointer-events-none">
-                        <span className="bg-[#1a1a24]/80 backdrop-blur-md text-white/90 text-[0.6rem] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider border border-white/10">
-                          {item.title.split(' ')[0]}
-                        </span>
-                      </div>
-                    </div>
-                  }
-                  back={
-                    <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center pointer-events-none rounded-[16px] bg-[#1a1a1a]">
-                      <h3 className="text-[1.2rem] font-black leading-tight mb-2">
-                        {item.title}
-                      </h3>
-                      <p className="text-[0.8rem] font-medium text-white/60 leading-relaxed">
-                        {item.description}
-                      </p>
-                    </div>
-                  }
-                />
-              </div>
+              <MobileFlipCard
+                key={item.id}
+                img={item.img}
+                title={item.title}
+                description={item.description}
+              />
             ))}
+            {/* End spacer so last card doesn't hug edge */}
+            <div className="flex-shrink-0 w-4" />
+          </div>
+
+          {/* Scroll hint */}
+          <div className="flex items-center justify-center gap-2 mt-2 text-brand-navy/40">
+            <span className="text-[0.6rem] font-bold tracking-widest uppercase">Swipe</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </div>
         </motion.div>
       </div>
-      <style dangerouslySetInnerHTML={{__html: `
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-      `}} />
     </div>
   );
 }
