@@ -20,7 +20,7 @@ export default function Layout() {
       <Cursor />
       <Navbar />
       <Outlet />
-      <Footer />
+      <Footer key={pathname} />
     </div>
   );
 }
