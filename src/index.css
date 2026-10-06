@@ -32,16 +32,16 @@ body {
 /* ── GLASSMORPHISM SYSTEM ────────────────────────── */
 .glass-panel {
   background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .glass-card {
   background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(16px) saturate(160%);
-  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -82,9 +82,10 @@ body {
   background: #111111;
   border-radius: 50%;
   position: fixed;
+  top: 0; left: 0;
   pointer-events: none;
   z-index: 99999;
-  transition: transform 0.1s ease;
+  will-change: transform;
 }
 
 .cursor-ring {
@@ -92,10 +93,11 @@ body {
   border: 1.5px solid rgba(17,17,17,0.3);
   border-radius: 50%;
   position: fixed;
+  top: 0; left: 0;
   pointer-events: none;
   z-index: 99998;
-  transition: transform 0.18s ease, width 0.2s ease, height 0.2s ease, border-color 0.2s;
-  backdrop-filter: blur(2px);
+  transition: width 0.2s ease, height 0.2s ease, border-color 0.2s;
+  will-change: transform;
 }
 
 .cursor-ring.hovered {
@@ -104,28 +106,19 @@ body {
   background: rgba(255, 212, 0, 0.1);
 }
 
-/* ── GRAIN OVERLAY ───────────────────────────────── */
+/* ── GRAIN OVERLAY (Static, zero CPU/GPU overhead) ── */
 .grain::after {
   content: '';
   position: fixed;
-  inset: -200%;
-  width: 400%; height: 400%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  opacity: 0.025;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.02;
   pointer-events: none;
   z-index: 9999;
-  animation: grainShift 0.8s steps(2) infinite;
 }
 
-@keyframes grainShift {
-  0%   { transform: translate(0,0); }
-  25%  { transform: translate(-1%,-1%); }
-  50%  { transform: translate(1%, 1%); }
-  75%  { transform: translate(-1%, 1%); }
-  100% { transform: translate(1%, -1%); }
-}
-
-/* Disable grain animation on mobile for performance */
 @media (max-width: 768px) {
   .grain::after { display: none; }
 }
@@ -216,12 +209,26 @@ body {
   background: linear-gradient(90deg, #0a0a0a, #888, #0a0a0a, #ccc);
   background-size: 300% 300%;
   animation: borderRotate 4s ease infinite;
+  will-change: background-position;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-border {
+    animation: none !important;
+  }
 }
 
 /* ── STICKER ─────────────────────────────────────── */
 .sticker {
   animation: float 5s ease-in-out infinite;
   cursor: none;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sticker {
+    animation: none !important;
+  }
 }
 
 .sticker:nth-child(2) { animation-delay: -1.5s; }
@@ -229,11 +236,18 @@ body {
 
 /* ── MARQUEE WRAPPER ─────────────────────────────── */
 .marquee-wrap { overflow: hidden; }
-.animate-marquee     { animation: marquee     25s linear infinite; }
-.animate-marquee-rev { animation: marquee-rev 25s linear infinite; }
+.animate-marquee     { animation: marquee     25s linear infinite; will-change: transform; }
+.animate-marquee-rev { animation: marquee-rev 25s linear infinite; will-change: transform; }
 .pause-animation .animate-marquee,
 .pause-animation .animate-marquee-rev { animation-play-state: paused; }
 .marquee-track { display: flex; width: max-content; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-rev {
+    animation: none !important;
+  }
+}
 
 /* ── SERVICE CARD HOVER ──────────────────────────── */
 .service-card { transition: all 0.4s cubic-bezier(0.16,1,0.3,1); }
@@ -265,4 +279,38 @@ body {
 
   /* Reduce animation complexity */
   .sticker { animation: none; }
+}
+
+/* ── BACKGROUND BLOB DRIFT (CSS-only, compositor-accelerated) ── */
+@keyframes blobDrift1 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  33% { transform: translate(-40px, 40px) scale(1.08) rotate(12deg); }
+  66% { transform: translate(20px, -20px) scale(0.95) rotate(-8deg); }
+}
+@keyframes blobDrift2 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  33% { transform: translate(50px, -35px) scale(0.92) rotate(-10deg); }
+  66% { transform: translate(-25px, 20px) scale(1.1) rotate(6deg); }
+}
+@keyframes blobDrift3 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  33% { transform: translate(55px, -40px) scale(1.12) rotate(15deg); }
+  66% { transform: translate(-20px, 30px) scale(0.9) rotate(-10deg); }
+}
+@keyframes blobDrift4 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  33% { transform: translate(35px, 28px) scale(1.06) rotate(-12deg); }
+  66% { transform: translate(-15px, -18px) scale(0.94) rotate(8deg); }
+}
+
+.animate-blob1 { animation: blobDrift1 22s ease-in-out infinite; }
+.animate-blob2 { animation: blobDrift2 26s ease-in-out infinite; }
+.animate-blob3 { animation: blobDrift3 20s ease-in-out infinite; }
+.animate-blob4 { animation: blobDrift4 18s ease-in-out infinite; }
+
+/* Disable blob animations on mobile */
+@media (max-width: 768px) {
+  .animate-blob1, .animate-blob2, .animate-blob3, .animate-blob4 {
+    animation: none;
+  }
 }

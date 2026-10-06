@@ -72,8 +72,13 @@ export default function Hero() {
 
       <BackgroundShapes variant="hero" />
 
-      {/* Background radial glow — desktop only */}
-      <div className="hidden md:block absolute top-1/4 right-10 w-[500px] h-[500px] bg-brand-yellow/20 rounded-full blur-[100px] pointer-events-none -z-10" />
+      {/* Background radial glow — desktop only (pure gradient, no expensive blur filter) */}
+      <div
+        className="hidden md:block absolute top-1/4 right-10 w-[500px] h-[500px] rounded-full pointer-events-none -z-10"
+        style={{
+          background: 'radial-gradient(circle, rgba(255,212,0,0.18) 0%, rgba(255,212,0,0.06) 45%, transparent 70%)',
+        }}
+      />
 
       {/* Giant ghost text */}
       <div className="animate-drift absolute -right-16 bottom-0 text-[clamp(180px,26vw,380px)]
