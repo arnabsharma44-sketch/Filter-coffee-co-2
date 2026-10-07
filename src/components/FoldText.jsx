@@ -154,8 +154,11 @@ const FoldText = ({
       scrollTrigger = ScrollTrigger.create({
         trigger: root,
         start: 'top 82%',
-        once: true,
-        onEnter: () => play(false)
+        onEnter: () => play(false),
+        onLeaveBack: () => {
+          killTimeline();
+          gsap.set(pieces, fromVars);
+        }
       });
     } else if (trigger === 'loop') {
       play(true);

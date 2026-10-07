@@ -70,6 +70,23 @@ export default function Hero() {
     <section id="home"
       className="relative min-h-screen flex items-center pt-[90px] overflow-hidden bg-transparent">
 
+      {/* Background Video */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          onEnded={(e) => e.target.play()}
+          className="w-full h-full object-cover opacity-[0.80] mix-blend-luminosity"
+        >
+          <source src="/videos/hero-bg.mp4" type="video/mp4" />
+        </video>
+        {/* Gradient overlay to seamlessly fade into the next section */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#f7f2e8]" />
+      </div>
+
       <BackgroundShapes variant="hero" />
 
       {/* Background radial glow — desktop only (pure gradient, no expensive blur filter) */}

@@ -3,6 +3,7 @@ import { useInView } from 'react-intersection-observer';
 import ScrollFloat from './ScrollFloat';
 import CountUp from './CountUp';
 import BackgroundShapes from './BackgroundShapes';
+import FoldText from './FoldText';
 
 const CLIENTS = Array.from({ length: 12 }, (_, i) => `Brand ${String(i+1).padStart(2,'0')}`);
 
@@ -113,9 +114,21 @@ export default function About({ hideHeader = false }) {
 
           {/* Client Logo Wall */}
           <div id="clients" className="mt-20">
-            <p className="text-[0.65rem] font-bold tracking-widest2 uppercase text-smoke mb-6">
-              OUR CLIENTS
-            </p>
+            <div className="text-[clamp(2.8rem,5vw,5.5rem)] font-black leading-[1.02] tracking-tight text-black mb-10">
+              <FoldText
+                text="OUR CLIENTS"
+                splitBy="char"
+                hinge="top"
+                trigger="scroll"
+                duration={0.65}
+                delay={0.1}
+                stagger={0.035}
+                ease="power3.out"
+                color="#000000"
+                fontSize="inherit"
+                fontWeight={900}
+              />
+            </div>
             <LogoGrid />
           </div>
         </div>
