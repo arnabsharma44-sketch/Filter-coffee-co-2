@@ -8,6 +8,7 @@ export default {
         mono: ['"SF Mono"', 'monospace'],
         serif: ['"Playfair Display"', 'Georgia', 'serif'],
         nunito: ['"Nunito"', 'sans-serif'],
+        display: ['Nighty', 'cursive', 'sans-serif'],
       },
       colors: {
         white:  '#ffffff',
