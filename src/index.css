@@ -4,6 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Nighty';
+  src: url('/FONT/Nighty DEMO.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ── BASE ────────────────────────────────────────── */
 * { box-sizing: border-box; }
 
