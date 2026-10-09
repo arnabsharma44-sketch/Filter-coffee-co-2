@@ -1,0 +1,52 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "c:\\Users\\asus\\OneDrive\\Documents\\GitHub\\Filter-coffee-co-2"],
+      "description": "Secure file system access for reading, writing, and editing project files"
+    },
+    "git": {
+      "command": "uvx",
+      "args": ["mcp-server-git", "--repository", "c:\\Users\\asus\\OneDrive\\Documents\\GitHub\\Filter-coffee-co-2"],
+      "description": "Git operations: commit, branch, diff, log, status, and repository management"
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "description": "GitHub API integration: issues, PRs, repos, actions, and code search"
+    },
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "description": "Persistent knowledge graph for storing facts, decisions, and context across sessions"
+    },
+    "sequentialthinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequentialthinking"],
+      "description": "Structured reasoning and problem-solving for complex debugging and architecture decisions"
+    },
+    "time": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-time"],
+      "description": "Time and timezone utilities for scheduling, timestamps, and date calculations"
+    },
+    "fetch": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-fetch"],
+      "description": "HTTP fetching capabilities for API testing, web scraping, and external service integration"
+    },
+    "everything": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-everything"],
+      "description": "Reference server with all MCP capabilities for testing and development"
+    },
+    "sqlite": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sqlite", "c:\\Users\\asus\\OneDrive\\Documents\\GitHub\\Filter-coffee-co-2\\data.db"],
+      "description": "Local SQLite database for data persistence, analytics, and testing"
+    }
+  }
+}
