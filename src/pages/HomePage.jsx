@@ -26,7 +26,7 @@ function Blurb() {
             className="absolute inset-0 w-full h-full object-cover rounded-3xl"
             style={{ zIndex: 0 }}
           >
-            <source src="/videos/blurb-bg.mp4" type="video/mp4" />
+            <source src="https://res.cloudinary.com/qxtrlo6i/video/upload/v1791541191/blurb-bg.mp4" type="video/mp4" />
           </video>
           
           {/* Dark gradient overlay for text readability */}
