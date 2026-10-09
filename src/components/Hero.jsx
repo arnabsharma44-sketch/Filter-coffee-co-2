@@ -27,7 +27,7 @@ export default function Hero() {
           preload="auto"
           className="w-full h-full object-cover opacity-80"
         >
-          <source src="/videos/new-bg.mp4" type="video/mp4" />
+          <source src="https://res.cloudinary.com/qxtrlo6i/video/upload/v1791541205/new-bg.mp4" type="video/mp4" />
         </video>
         {/* Dark gradient overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-brand-navy/60 via-brand-navy/30 to-brand-navy" />
@@ -85,7 +85,7 @@ export default function Hero() {
                   preload="auto"
                   className="absolute inset-0 w-full h-full object-cover"
                 >
-                  <source src="/videos/hero-pill.mp4" type="video/mp4" />
+                  <source src="https://res.cloudinary.com/qxtrlo6i/video/upload/v1791541217/hero-pill.mp4" type="video/mp4" />
                 </video>
               </motion.div>
               <span>brands</span>
