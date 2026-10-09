@@ -1,52 +1,499 @@
 {
-  "mcpServers": {
-    "filesystem": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "c:\\Users\\asus\\OneDrive\\Documents\\GitHub\\Filter-coffee-co-2"],
-      "description": "Secure file system access for reading, writing, and editing project files"
-    },
-    "git": {
-      "command": "uvx",
-      "args": ["mcp-server-git", "--repository", "c:\\Users\\asus\\OneDrive\\Documents\\GitHub\\Filter-coffee-co-2"],
-      "description": "Git operations: commit, branch, diff, log, status, and repository management"
-    },
-    "github": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
-      },
-      "description": "GitHub API integration: issues, PRs, repos, actions, and code search"
-    },
-    "memory": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-memory"],
-      "description": "Persistent knowledge graph for storing facts, decisions, and context across sessions"
-    },
-    "sequentialthinking": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequentialthinking"],
-      "description": "Structured reasoning and problem-solving for complex debugging and architecture decisions"
-    },
-    "time": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-time"],
-      "description": "Time and timezone utilities for scheduling, timestamps, and date calculations"
-    },
-    "fetch": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-fetch"],
-      "description": "HTTP fetching capabilities for API testing, web scraping, and external service integration"
-    },
-    "everything": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-everything"],
-      "description": "Reference server with all MCP capabilities for testing and development"
-    },
-    "sqlite": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sqlite", "c:\\Users\\asus\\OneDrive\\Documents\\GitHub\\Filter-coffee-co-2\\data.db"],
-      "description": "Local SQLite database for data persistence, analytics, and testing"
-    }
-  }
+    "mcpServers":  {
+                       "sequentialthinking":  {
+                                                  "args":  [
+                                                               "-y",
+                                                               "@modelcontextprotocol/server-sequentialthinking"
+                                                           ],
+                                                  "command":  "npx",
+                                                  "description":  "Reasoning"
+                                              },
+                       "docker":  {
+                                      "args":  [
+                                                   "run",
+                                                   "-i",
+                                                   "--rm",
+                                                   "-v",
+                                                   "/var/run/docker.sock:/var/run/docker.sock",
+                                                   "mcp/docker"
+                                               ],
+                                      "command":  "docker",
+                                      "description":  "Docker"
+                                  },
+                       "grafana":  {
+                                       "args":  [
+                                                    "-y",
+                                                    "@modelcontextprotocol/server-grafana"
+                                                ],
+                                       "env":  {
+                                                   "GRAFANA_URL":  "${GRAFANA_URL}",
+                                                   "GRAFANA_API_KEY":  "${GRAFANA_API_KEY}"
+                                               },
+                                       "command":  "npx",
+                                       "description":  "Grafana"
+                                   },
+                       "linear":  {
+                                      "args":  [
+                                                   "-y",
+                                                   "@modelcontextprotocol/server-linear"
+                                               ],
+                                      "env":  {
+                                                  "LINEAR_API_KEY":  "${LINEAR_API_KEY}"
+                                              },
+                                      "command":  "npx",
+                                      "description":  "Linear"
+                                  },
+                       "jest":  {
+                                    "args":  [
+                                                 "-y",
+                                                 "@modelcontextprotocol/server-jest"
+                                             ],
+                                    "command":  "npx",
+                                    "description":  "Jest"
+                                },
+                       "sqlite":  {
+                                      "args":  [
+                                                   "-y",
+                                                   "@modelcontextprotocol/server-sqlite",
+                                                   "c:\\Users\\asus\\OneDrive\\Documents\\GitHub\\Filter-coffee-co-2\\data.db"
+                                               ],
+                                      "command":  "npx",
+                                      "description":  "SQLite"
+                                  },
+                       "fetch":  {
+                                     "args":  [
+                                                  "-y",
+                                                  "@modelcontextprotocol/server-fetch"
+                                              ],
+                                     "command":  "npx",
+                                     "description":  "HTTP fetch"
+                                 },
+                       "shell":  {
+                                     "args":  [
+                                                  "-y",
+                                                  "@modelcontextprotocol/server-shell"
+                                              ],
+                                     "command":  "npx",
+                                     "description":  "Shell"
+                                 },
+                       "vscode":  {
+                                      "args":  [
+                                                   "-y",
+                                                   "@modelcontextprotocol/server-vscode"
+                                               ],
+                                      "command":  "npx",
+                                      "description":  "VS Code"
+                                  },
+                       "slack":  {
+                                     "args":  [
+                                                  "-y",
+                                                  "@modelcontextprotocol/server-slack"
+                                              ],
+                                     "env":  {
+                                                 "SLACK_TEAM_ID":  "${SLACK_TEAM_ID}",
+                                                 "SLACK_BOT_TOKEN":  "${SLACK_BOT_TOKEN}"
+                                             },
+                                     "command":  "npx",
+                                     "description":  "Slack"
+                                 },
+                       "aws":  {
+                                   "args":  [
+                                                "-y",
+                                                "@modelcontextprotocol/server-aws"
+                                            ],
+                                   "env":  {
+                                               "AWS_SECRET_ACCESS_KEY":  "${AWS_SECRET_ACCESS_KEY}",
+                                               "AWS_ACCESS_KEY_ID":  "${AWS_ACCESS_KEY_ID}",
+                                               "AWS_REGION":  "us-east-1"
+                                           },
+                                   "command":  "npx",
+                                   "description":  "AWS"
+                               },
+                       "rust":  {
+                                    "args":  [
+                                                 "run",
+                                                 "--bin",
+                                                 "mcp-server-rust"
+                                             ],
+                                    "command":  "cargo",
+                                    "description":  "Rust"
+                                },
+                       "graphql":  {
+                                       "args":  [
+                                                    "-y",
+                                                    "@modelcontextprotocol/server-graphql"
+                                                ],
+                                       "command":  "npx",
+                                       "description":  "GraphQL"
+                                   },
+                       "jira":  {
+                                    "args":  [
+                                                 "-y",
+                                                 "@modelcontextprotocol/server-jira"
+                                             ],
+                                    "env":  {
+                                                "JIRA_API_TOKEN":  "${JIRA_API_TOKEN}",
+                                                "JIRA_URL":  "${JIRA_URL}",
+                                                "JIRA_USERNAME":  "${JIRA_USERNAME}"
+                                            },
+                                    "command":  "npx",
+                                    "description":  "Jira"
+                                },
+                       "rest":  {
+                                    "args":  [
+                                                 "-y",
+                                                 "@modelcontextprotocol/server-rest"
+                                             ],
+                                    "command":  "npx",
+                                    "description":  "REST API"
+                                },
+                       "sonarqube":  {
+                                         "args":  [
+                                                      "-y",
+                                                      "@modelcontextprotocol/server-sonarqube"
+                                                  ],
+                                         "env":  {
+                                                     "SONARQUBE_URL":  "${SONARQUBE_URL}",
+                                                     "SONARQUBE_TOKEN":  "${SONARQUBE_TOKEN}"
+                                                 },
+                                         "command":  "npx",
+                                         "description":  "SonarQube"
+                                     },
+                       "memory":  {
+                                      "args":  [
+                                                   "-y",
+                                                   "@modelcontextprotocol/server-memory"
+                                               ],
+                                      "command":  "npx",
+                                      "description":  "Knowledge graph"
+                                  },
+                       "npm":  {
+                                   "args":  [
+                                                "-y",
+                                                "@modelcontextprotocol/server-npm"
+                                            ],
+                                   "command":  "npx",
+                                   "description":  "NPM"
+                               },
+                       "filesystem":  {
+                                          "args":  [
+                                                       "-y",
+                                                       "@modelcontextprotocol/server-filesystem",
+                                                       "c:\\Users\\asus\\OneDrive\\Documents\\GitHub\\Filter-coffee-co-2"
+                                                   ],
+                                          "command":  "npx",
+                                          "description":  "File system access"
+                                      },
+                       "prometheus":  {
+                                          "args":  [
+                                                       "-y",
+                                                       "@modelcontextprotocol/server-prometheus"
+                                                   ],
+                                          "env":  {
+                                                      "PROMETHEUS_URL":  "${PROMETHEUS_URL}"
+                                                  },
+                                          "command":  "npx",
+                                          "description":  "Prometheus"
+                                      },
+                       "github":  {
+                                      "args":  [
+                                                   "-y",
+                                                   "@modelcontextprotocol/server-github"
+                                               ],
+                                      "env":  {
+                                                  "GITHUB_PERSONAL_ACCESS_TOKEN":  "${GITHUB_TOKEN}"
+                                              },
+                                      "command":  "npx",
+                                      "description":  "GitHub API"
+                                  },
+                       "time":  {
+                                    "args":  [
+                                                 "-y",
+                                                 "@modelcontextprotocol/server-time"
+                                             ],
+                                    "command":  "npx",
+                                    "description":  "Time utils"
+                                },
+                       "git":  {
+                                   "args":  [
+                                                "mcp-server-git",
+                                                "--repository",
+                                                "c:\\Users\\asus\\OneDrive\\Documents\\GitHub\\Filter-coffee-co-2"
+                                            ],
+                                   "command":  "uvx",
+                                   "description":  "Git operations"
+                               },
+                       "everything":  {
+                                          "args":  [
+                                                       "-y",
+                                                       "@modelcontextprotocol/server-everything"
+                                                   ],
+                                          "command":  "npx",
+                                          "description":  "Reference"
+                                      },
+                       "playwright":  {
+                                          "args":  [
+                                                       "-y",
+                                                       "@playwright/mcp@latest"
+                                                   ],
+                                          "command":  "npx",
+                                          "description":  "Browser automation"
+                                      },
+                       "eslint":  {
+                                      "args":  [
+                                                   "-y",
+                                                   "@modelcontextprotocol/server-eslint"
+                                               ],
+                                      "command":  "npx",
+                                      "description":  "ESLint"
+                                  },
+                       "go":  {
+                                  "args":  [
+                                               "run",
+                                               "github.com/modelcontextprotocol/server-go@latest"
+                                           ],
+                                  "command":  "go",
+                                  "description":  "Go"
+                              },
+                       "redis":  {
+                                     "args":  [
+                                                  "-y",
+                                                  "@modelcontextprotocol/server-redis",
+                                                  "redis://localhost:6379"
+                                              ],
+                                     "command":  "npx",
+                                     "description":  "Redis"
+                                 },
+                       "websocket":  {
+                                         "args":  [
+                                                      "-y",
+                                                      "@modelcontextprotocol/server-websocket"
+                                                  ],
+                                         "command":  "npx",
+                                         "description":  "WebSocket"
+                                     },
+                       "postgres":  {
+                                        "args":  [
+                                                     "-y",
+                                                     "@modelcontextprotocol/server-postgres",
+                                                     "postgresql://localhost:5432/filtercoffee"
+                                                 ],
+                                        "command":  "npx",
+                                        "description":  "PostgreSQL"
+                                    },
+                       "python":  {
+                                      "args":  [
+                                                   "mcp-server-python"
+                                               ],
+                                      "command":  "uvx",
+                                      "description":  "Python"
+                                  },
+                       "mongodb":  {
+                                       "args":  [
+                                                    "-y",
+                                                    "@modelcontextprotocol/server-mongodb",
+                                                    "mongodb://localhost:27017/filtercoffee"
+                                                ],
+                                       "command":  "npx",
+                                       "description":  "MongoDB"
+                                   },
+                       "terraform":  {
+                                         "args":  [
+                                                      "-y",
+                                                      "@modelcontextprotocol/server-terraform"
+                                                  ],
+                                         "command":  "npx",
+                                         "description":  "Terraform"
+                                     },
+                       "notion":  {
+                                      "args":  [
+                                                   "-y",
+                                                   "@modelcontextprotocol/server-notion"
+                                               ],
+                                      "env":  {
+                                                  "NOTION_API_KEY":  "${NOTION_API_KEY}"
+                                              },
+                                      "command":  "npx",
+                                      "description":  "Notion"
+                                  },
+                       "kubernetes":  {
+                                          "args":  [
+                                                       "-y",
+                                                       "@modelcontextprotocol/server-kubernetes"
+                                                   ],
+                                          "command":  "npx",
+                                          "description":  "Kubernetes"
+                                      }
+                   },
+    "skills":  {
+                   "devops-engineer":  {
+                                           "description":  "DevOps engineer",
+                                           "servers":  [
+                                                           "filesystem",
+                                                           "git",
+                                                           "github",
+                                                           "docker",
+                                                           "kubernetes",
+                                                           "terraform",
+                                                           "aws",
+                                                           "grafana",
+                                                           "prometheus",
+                                                           "shell",
+                                                           "python",
+                                                           "slack",
+                                                           "jira",
+                                                           "linear"
+                                                       ],
+                                           "focus":  [
+                                                         "Kubernetes",
+                                                         "Terraform",
+                                                         "CI/CD",
+                                                         "Cloud",
+                                                         "Monitoring",
+                                                         "Logging",
+                                                         "Security",
+                                                         "Disaster recovery",
+                                                         "Platform eng",
+                                                         "FinOps"
+                                                     ]
+                                       },
+                   "senior-web-developer":  {
+                                                "description":  "Senior web dev",
+                                                "servers":  [
+                                                                "filesystem",
+                                                                "git",
+                                                                "github",
+                                                                "memory",
+                                                                "sequentialthinking",
+                                                                "fetch",
+                                                                "playwright",
+                                                                "eslint",
+                                                                "jest",
+                                                                "npm",
+                                                                "vscode",
+                                                                "sqlite",
+                                                                "redis"
+                                                            ],
+                                                "focus":  [
+                                                              "React/TypeScript",
+                                                              "Performance",
+                                                              "Testing",
+                                                              "CI/CD",
+                                                              "Code review",
+                                                              "Security",
+                                                              "Accessibility",
+                                                              "Bundle optimization",
+                                                              "State management",
+                                                              "Micro-frontend"
+                                                          ]
+                                            },
+                   "debugging-expert":  {
+                                            "description":  "Debugging expert",
+                                            "servers":  [
+                                                            "filesystem",
+                                                            "git",
+                                                            "github",
+                                                            "memory",
+                                                            "sequentialthinking",
+                                                            "playwright",
+                                                            "eslint",
+                                                            "jest",
+                                                            "shell",
+                                                            "grafana",
+                                                            "prometheus",
+                                                            "websocket",
+                                                            "redis",
+                                                            "postgres"
+                                                        ],
+                                            "focus":  [
+                                                          "Root cause",
+                                                          "Production debug",
+                                                          "Memory leaks",
+                                                          "Race conditions",
+                                                          "Network analysis",
+                                                          "Query optimization",
+                                                          "Profiling",
+                                                          "CI/CD failures",
+                                                          "Distributed tracing",
+                                                          "Incident response"
+                                                      ]
+                                        },
+                   "fullstack-architect":  {
+                                               "description":  "Full-stack architect",
+                                               "servers":  [
+                                                               "filesystem",
+                                                               "git",
+                                                               "github",
+                                                               "memory",
+                                                               "sequentialthinking",
+                                                               "postgres",
+                                                               "mongodb",
+                                                               "redis",
+                                                               "graphql",
+                                                               "rest",
+                                                               "websocket",
+                                                               "docker",
+                                                               "kubernetes",
+                                                               "aws",
+                                                               "playwright",
+                                                               "jest",
+                                                               "npm"
+                                                           ],
+                                               "focus":  [
+                                                             "Architecture",
+                                                             "Database",
+                                                             "API gateway",
+                                                             "Real-time",
+                                                             "Caching",
+                                                             "Auth",
+                                                             "Event-driven",
+                                                             "Consistency",
+                                                             "Multi-region",
+                                                             "Documentation"
+                                                         ]
+                                           },
+                   "senior-software-engineer":  {
+                                                    "description":  "Senior SWE",
+                                                    "servers":  [
+                                                                    "filesystem",
+                                                                    "git",
+                                                                    "github",
+                                                                    "memory",
+                                                                    "sequentialthinking",
+                                                                    "time",
+                                                                    "docker",
+                                                                    "kubernetes",
+                                                                    "terraform",
+                                                                    "aws",
+                                                                    "grafana",
+                                                                    "prometheus",
+                                                                    "sonarqube",
+                                                                    "postgres",
+                                                                    "mongodb",
+                                                                    "graphql",
+                                                                    "rest",
+                                                                    "shell",
+                                                                    "python",
+                                                                    "rust",
+                                                                    "go"
+                                                                ],
+                                                    "focus":  [
+                                                                  "System design",
+                                                                  "Distributed systems",
+                                                                  "Database design",
+                                                                  "API design",
+                                                                  "Observability",
+                                                                  "IaC",
+                                                                  "Security",
+                                                                  "Performance",
+                                                                  "Tech debt",
+                                                                  "Leadership"
+                                                              ]
+                                                }
+               },
+    "environment":  {
+                        "NODE_ENV":  "development",
+                        "PROJECT_ROOT":  "c:\\Users\\asus\\OneDrive\\Documents\\GitHub\\Filter-coffee-co-2",
+                        "EDITOR":  "code"
+                    }
 }
