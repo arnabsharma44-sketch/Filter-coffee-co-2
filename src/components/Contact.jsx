@@ -1,7 +1,6 @@
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import ScrollFloat from './ScrollFloat';
 import BackgroundShapes from './BackgroundShapes';
 
 const OPTIONS = [
@@ -54,29 +53,24 @@ export default function Contact() {
 
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.16,1,0.3,1] }}
-          className="text-center mb-16">
-
-          <p className="text-[0.68rem] font-bold tracking-widest2 uppercase text-smoke mb-6">
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center mb-16"
+        >
+          <div className="inline-flex items-center gap-2.5 text-[0.68rem] font-bold tracking-widest2 uppercase text-smoke mb-6 glass-pill px-4 py-1.5 rounded-full">
+            <span className="w-2 h-2 rounded-full bg-brand-yellow inline-block animate-pulse" />
             GOT A BRIEF?
-          </p>
+          </div>
 
-          <ScrollFloat
-            animationDuration={3}
-            textClassName="text-[clamp(2.8rem,6vw,6.5rem)] font-black leading-[1] tracking-tight text-black mb-6"
-          >
+          <h1 className="text-[clamp(2.8rem,6.2vw,6rem)] font-black leading-[1.08] tracking-[-0.035em] text-black mb-3">
             Spill the beans.
-          </ScrollFloat>
-          <ScrollFloat
-            animationDuration={3}
-            textClassName="text-[clamp(2.8rem,6vw,6.5rem)] font-extralight italic text-black/70 leading-[1] tracking-tight mb-6"
-          >
+          </h1>
+          <h2 className="text-[clamp(2.4rem,5.4vw,5.2rem)] font-serif italic font-light text-black/75 leading-[1.12] tracking-tight mb-8">
             We'll brew the idea.
-          </ScrollFloat>
+          </h2>
 
-          <p className="text-smoke text-base max-w-lg mx-auto leading-relaxed mb-10 font-medium">
+          <p className="text-smoke text-base md:text-lg max-w-lg mx-auto leading-relaxed mb-10 font-medium">
             New campaign? Social needs a refresh? Launch loading? Or just an idea sitting in your notes app?
             Slide into our inbox.
           </p>

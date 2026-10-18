@@ -55,19 +55,26 @@ export default function Cursor() {
     const onMove = (e) => {
       mx = e.clientX;
       my = e.clientY;
+      if (dot.current) {
+        dot.current.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%, -50%)`;
+      }
       startLoop();
     };
 
     window.addEventListener('mousemove', onMove, { passive: true });
 
-    // Delegate hover detection — uses event delegation instead of querySelectorAll
+    // Fast hover detection
     const onOver = (e) => {
-      const target = e.target.closest('a, button, .mag-btn, .work-card, .service-card, .logo-slot');
-      if (target && ring.current) ring.current.classList.add('hovered');
+      const el = e.target;
+      if (el && (el.tagName === 'A' || el.tagName === 'BUTTON' || el.closest('a, button, .mag-btn, .work-card, .logo-slot'))) {
+        if (ring.current) ring.current.classList.add('hovered');
+      }
     };
     const onOut = (e) => {
-      const target = e.target.closest('a, button, .mag-btn, .work-card, .service-card, .logo-slot');
-      if (target && ring.current) ring.current.classList.remove('hovered');
+      const el = e.target;
+      if (el && (el.tagName === 'A' || el.tagName === 'BUTTON' || el.closest('a, button, .mag-btn, .work-card, .logo-slot'))) {
+        if (ring.current) ring.current.classList.remove('hovered');
+      }
     };
 
     document.addEventListener('mouseover', onOver, { passive: true });

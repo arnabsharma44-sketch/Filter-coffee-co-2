@@ -193,7 +193,7 @@ export default function GalleryPage() {
             animateFrom="bottom"
             scaleOnHover
             hoverScale={0.98}
-            blurToFocus
+            blurToFocus={false}
             colorShiftOnHover={false}
           />
         </motion.div>

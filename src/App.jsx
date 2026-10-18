@@ -7,7 +7,7 @@ import GalleryPage  from './pages/GalleryPage';
 import AboutPage    from './pages/AboutPage';
 import ClientsPage  from './pages/ClientsPage';
 import ContactPage  from './pages/ContactPage';
-import ProjectPage  from './pages/ProjectPage';
+import WorkRouteDispatcher from './pages/WorkRouteDispatcher';
 
 export default function App() {
   return (
@@ -15,7 +15,7 @@ export default function App() {
       <Route element={<Layout />}>
         <Route path="/"         element={<HomePage />} />
         <Route path="/work"     element={<WorkPage />} />
-        <Route path="/work/:slug" element={<WorkPage />} />
+        <Route path="/work/:slug" element={<WorkRouteDispatcher />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/gallery"  element={<GalleryPage />} />
         <Route path="/about"    element={<AboutPage />} />
