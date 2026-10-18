@@ -205,7 +205,7 @@ export default function ProjectPage() {
               transition={{ duration: 0.7, delay: i * 0.12 }}
               className="rounded-2xl overflow-hidden aspect-[4/3]"
             >
-              <img src={img} alt="" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+              <img src={img} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
             </motion.div>
           ))}
         </div>

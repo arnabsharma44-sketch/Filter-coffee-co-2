@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useMemo } from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -8,27 +8,60 @@ import './ScrollReveal.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Helper to split children (strings or nested React elements) into animatable word spans
+function parseWords(children) {
+  const result = [];
+  let keyCounter = 0;
+
+  function traverse(child, inheritedProps = {}) {
+    if (typeof child === 'string' || typeof child === 'number') {
+      const text = String(child);
+      const parts = text.split(/(\s+)/);
+      parts.forEach((part) => {
+        if (!part) return;
+        if (part.match(/^\s+$/)) {
+          result.push(part);
+        } else {
+          result.push(
+            <span
+              key={`w-${keyCounter++}`}
+              className={`word inline-block ${inheritedProps.className || ''}`}
+              style={inheritedProps.style}
+            >
+              {part}
+            </span>
+          );
+        }
+      });
+    } else if (Array.isArray(child)) {
+      child.forEach((c) => traverse(c, inheritedProps));
+    } else if (React.isValidElement(child)) {
+      traverse(child.props.children, {
+        className: `${inheritedProps.className || ''} ${child.props.className || ''}`.trim(),
+        style: { ...inheritedProps.style, ...child.props.style }
+      });
+    }
+  }
+
+  traverse(children);
+  return result;
+}
+
 const ScrollReveal = ({
   children,
   scrollContainerRef,
   baseOpacity = 0.15,
   baseRotation = 2,
+  enableBlur = false,
+  blurStrength = 4,
+  start = 'top 92%',
+  end = 'top 45%',
   containerClassName = '',
   textClassName = '',
 }) => {
   const containerRef = useRef(null);
 
-  const splitText = useMemo(() => {
-    const text = typeof children === 'string' ? children : '';
-    return text.split(/(\s+)/).map((word, index) => {
-      if (word.match(/^\s+$/)) return word;
-      return (
-        <span className="word inline-block" key={index}>
-          {word}
-        </span>
-      );
-    });
-  }, [children]);
+  const splitText = useMemo(() => parseWords(children), [children]);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -36,49 +69,58 @@ const ScrollReveal = ({
 
     const scroller = scrollContainerRef?.current || window;
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        el,
-        { transformOrigin: '0% 50%', rotate: baseRotation },
-        {
-          ease: 'power2.out',
-          rotate: 0,
-          scrollTrigger: {
-            trigger: el,
-            scroller,
-            start: 'top 92%',
-            end: 'top 45%',
-            scrub: 1.5,
-          },
-        }
-      );
+      if (baseRotation !== 0) {
+        gsap.fromTo(
+          el,
+          { transformOrigin: '0% 50%', rotate: baseRotation },
+          {
+            ease: 'power2.out',
+            rotate: 0,
+            scrollTrigger: {
+              trigger: el,
+              scroller,
+              start,
+              end,
+              scrub: 0.8,
+              fastScrollEnd: true,
+            },
+          }
+        );
+      }
 
       const wordElements = el.querySelectorAll('.word');
 
-      gsap.fromTo(
-        wordElements,
-        { opacity: baseOpacity, y: 12 },
-        {
-          ease: 'power2.out',
-          opacity: 1,
-          y: 0,
-          stagger: 0.15,
-          scrollTrigger: {
-            trigger: el,
-            scroller,
-            start: 'top 92%',
-            end: 'top 45%',
-            scrub: 1.5,
-          },
-        }
-      );
+      const fromVars = {
+        opacity: baseOpacity,
+        y: 12,
+        ...(enableBlur ? { filter: `blur(${blurStrength}px)` } : {}),
+      };
+
+      const toVars = {
+        ease: 'power2.out',
+        opacity: 1,
+        y: 0,
+        ...(enableBlur ? { filter: 'blur(0px)' } : {}),
+        stagger: 0.08,
+        scrollTrigger: {
+          trigger: el,
+          scroller,
+          start,
+          end,
+          scrub: 0.8,
+          fastScrollEnd: true,
+        },
+      };
+
+      gsap.fromTo(wordElements, fromVars, toVars);
     }, containerRef);
 
     return () => ctx.revert();
-  }, [scrollContainerRef, baseRotation, baseOpacity]);
+  }, [scrollContainerRef, baseRotation, baseOpacity, enableBlur, blurStrength, start, end]);
 
   return (
     <div ref={containerRef} className={`scroll-reveal-container ${containerClassName}`}>
-      <p className={`scroll-reveal-text ${textClassName}`}>{splitText}</p>
+      <div className={`scroll-reveal-text ${textClassName}`}>{splitText}</div>
     </div>
   );
 };

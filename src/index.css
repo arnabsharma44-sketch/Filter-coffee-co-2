@@ -16,9 +16,7 @@
 * { box-sizing: border-box; }
 
 html {
-  scroll-behavior: smooth;
   overflow-x: hidden;
-  /* Promote scrolling to its own compositor layer */
   -webkit-overflow-scrolling: touch;
 }
 
@@ -28,15 +26,14 @@ body {
   font-family: 'SF Pro Display','SF Pro Text','Inter',-apple-system,BlinkMacSystemFont,sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeSpeed;
   cursor: none;
   overflow-x: hidden;
 }
 
-/* Ensure all animated elements use GPU compositing */
-[data-framer-motion], .motion-div {
-  will-change: transform, opacity;
-  transform: translateZ(0);
+/* Optimize off-screen section rendering performance */
+section:not(#home) {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
 }
 
 /* Reduce layout shifts on images */
@@ -58,28 +55,28 @@ img {
 ::-webkit-scrollbar-track { background: #ffffff; }
 ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 4px; }
 
-/* ── GLASSMORPHISM SYSTEM ────────────────────────── */
+/* ── GLASSMORPHISM SYSTEM (Optimized for 60/120fps) ────────────────────────── */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(12px) saturate(150%);
-  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  box-shadow: 0 16px 32px -12px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(10px) saturate(140%);
-  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
 .glass-card:hover {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.9);
   border-color: rgba(0, 0, 0, 0.16);
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 1);
+  box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 1);
   transform: translateY(-2px);
 }
 
@@ -294,9 +291,9 @@ img {
 }
 
 /* ── SERVICE CARD HOVER ──────────────────────────── */
-.service-card { transition: all 0.4s cubic-bezier(0.16,1,0.3,1); }
+.service-card { transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease, border-color 0.4s ease; }
 .service-card:hover .service-num { opacity: 1; transform: translateX(0); }
-.service-num { opacity: 0.6; transform: translateX(-8px); transition: all 0.3s ease; }
+.service-num { opacity: 0.6; transform: translateX(-8px); transition: transform 0.3s ease, opacity 0.3s ease; }
 
 /* ── STAT FLIP ───────────────────────────────────── */
 @keyframes countUp {
@@ -306,7 +303,7 @@ img {
 .stat-animate { animation: countUp 0.6s cubic-bezier(0.16,1,0.3,1) forwards; }
 
 /* ── LOGO SLOT ───────────────────────────────────── */
-.logo-slot { transition: all 0.3s ease; filter: grayscale(1) opacity(0.5); }
+.logo-slot { transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease; filter: grayscale(1) opacity(0.5); }
 .logo-slot:hover { filter: grayscale(0) opacity(1); transform: scale(1.05); }
 
 /* ── MOBILE PERFORMANCE ─────────────────────────── */

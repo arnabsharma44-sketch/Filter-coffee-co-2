@@ -60,7 +60,8 @@ const ScrollFloat = ({
             scroller,
             start: scrollStart,
             end: scrollEnd,
-            scrub: 2,
+            scrub: 0.8,
+            fastScrollEnd: true,
           },
         }
       );

@@ -14,20 +14,20 @@ const works = [
 ];
 
 function WorkCard({ tag, label, cls, image, slug, index }) {
-  const [ref, inView] = useInView({ threshold: 0.1 });
+  const [ref, inView] = useInView({ threshold: 0.08, triggerOnce: true });
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, x: [0, 2, 5].includes(index) ? -100 : 100 }}
-      animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: [0, 2, 5].includes(index) ? -100 : 100 }}
-      transition={{ duration: 0.8, delay: inView ? 0.2 + (index * 0.2) : 0, ease: [0.16,1,0.3,1] }}
+      initial={{ opacity: 0, y: 24 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
       className={`work-card glass-card noise-card group relative overflow-hidden rounded-2xl cursor-none ${cls}`}>
 
       <div className="w-full h-full min-h-[220px] flex items-center justify-center relative p-6">
         
         {image ? (
-          <img src={image} alt={label} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          <img src={image} alt={label} loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
         ) : (
           <>
             {/* Animated grid pattern fallback */}

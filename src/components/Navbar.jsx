@@ -37,15 +37,12 @@ export default function Navbar() {
       const diff = currentY - lastScrollY.current;
 
       if (currentY <= 30) {
-        // At top of page: always full expanded bar
-        setMinimized(false);
+        setMinimized((prev) => prev ? false : prev);
       } else if (currentY > 70 && diff > 4) {
-        // Scrolling down: smoothly shrink to centered logo pill
-        setMinimized(true);
+        setMinimized((prev) => !prev ? true : prev);
         setOpen(false);
       } else if (diff < -8) {
-        // Scrolling up: reopen with all options
-        setMinimized(false);
+        setMinimized((prev) => prev ? false : prev);
       }
 
       lastScrollY.current = currentY;
@@ -78,33 +75,30 @@ export default function Navbar() {
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className="fixed top-0 inset-x-0 z-[500] flex items-center justify-center px-4 md:px-8 pt-3 pointer-events-none"
     >
-      {/* ── Glassmorphism Pill Container ── */}
-      <motion.div
-        layout
-        transition={springConfig}
+      {/* ── Glassmorphism Pill Container (Compositor-accelerated) ── */}
+      <div
         onClick={handlePillClick}
-        whileHover={minimized ? { scale: 1.04 } : undefined}
-        whileTap={minimized ? { scale: 0.97 } : undefined}
-        className={`pointer-events-auto relative flex items-center transition-colors duration-300 ${
-          minimized ? 'cursor-pointer' : ''
+        className={`pointer-events-auto relative flex items-center ${
+          minimized ? 'cursor-pointer hover:scale-[1.03] active:scale-[0.98]' : ''
         }`}
         style={{
           borderRadius: 9999,
           background: minimized
-            ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.90) 0%, rgba(255, 255, 255, 0.78) 100%)'
-            : 'linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.72) 100%)',
-          backdropFilter: 'blur(24px) saturate(190%)',
-          WebkitBackdropFilter: 'blur(24px) saturate(190%)',
+            ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.82) 100%)'
+            : 'linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.74) 100%)',
+          backdropFilter: 'blur(12px) saturate(140%)',
+          WebkitBackdropFilter: 'blur(12px) saturate(140%)',
           border: '1px solid rgba(255, 255, 255, 0.85)',
           boxShadow: minimized
-            ? '0 16px 38px -10px rgba(0, 0, 0, 0.14), 0 2px 8px rgba(0,0,0,0.03), inset 0 1px 1px rgba(255, 255, 255, 0.95)'
-            : '0 8px 30px -8px rgba(0, 0, 0, 0.07), 0 1px 4px rgba(0,0,0,0.02), inset 0 1px 1px rgba(255, 255, 255, 0.9)',
+            ? '0 16px 36px -10px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0,0,0,0.03), inset 0 1px 1px rgba(255, 255, 255, 0.95)'
+            : '0 8px 28px -8px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0,0,0,0.02), inset 0 1px 1px rgba(255, 255, 255, 0.9)',
           paddingLeft: minimized ? '22px' : '28px',
           paddingRight: minimized ? '22px' : '28px',
           paddingTop: minimized ? '10px' : '12px',
           paddingBottom: minimized ? '10px' : '12px',
           maxWidth: minimized ? '260px' : '1180px',
           width: minimized ? 'auto' : '100%',
+          transition: 'max-width 0.35s cubic-bezier(0.16, 1, 0.3, 1), padding 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, background 0.3s ease, transform 0.2s ease',
         }}
       >
         <div
@@ -155,7 +149,7 @@ export default function Navbar() {
                     <li key={l.to} className="relative group/item">
                       <Link
                         to={l.to}
-                        className={`flex flex-col items-center relative transition-opacity ${
+                        className={`group flex items-center relative transition-opacity ${
                           location.pathname === l.to ? 'opacity-100 font-extrabold' : 'opacity-85 hover:opacity-100'
                         }`}
                       >
@@ -266,7 +260,7 @@ export default function Navbar() {
             </motion.div>
           )}
         </AnimatePresence>
-      </motion.div>
+      </div>
     </motion.nav>
   );
 }
