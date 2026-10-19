@@ -108,34 +108,34 @@ export default function Contact() {
           <form ref={formRef} onSubmit={handleSubmit} noValidate className="space-y-7">
             <div className="grid md:grid-cols-2 gap-6">
               <div className="flex flex-col gap-2">
-                <label className="text-[0.65rem] font-bold tracking-widest uppercase text-black/70">
+                <label htmlFor="contact-name" className="text-[0.65rem] font-bold tracking-widest uppercase text-black/70">
                   Your Name
                 </label>
-                <input name="name" type="text" placeholder="What do we call you?"
+                <input id="contact-name" name="name" type="text" placeholder="What do we call you?"
                   className={fieldCls('name')} />
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-[0.65rem] font-bold tracking-widest uppercase text-black/70">
+                <label htmlFor="contact-brand" className="text-[0.65rem] font-bold tracking-widest uppercase text-black/70">
                   Brand / Company
                 </label>
-                <input name="brand" type="text" placeholder="Brand in the blend?"
+                <input id="contact-brand" name="brand" type="text" placeholder="Brand in the blend?"
                   className={fieldCls('brand')} />
               </div>
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-[0.65rem] font-bold tracking-widest uppercase text-black/70">
+              <label htmlFor="contact-email" className="text-[0.65rem] font-bold tracking-widest uppercase text-black/70">
                 Email
               </label>
-              <input name="email" type="email" placeholder="hello@yourbrand.com"
+              <input id="contact-email" name="email" type="email" placeholder="hello@yourbrand.com"
                 className={fieldCls('email')} />
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-[0.65rem] font-bold tracking-widest uppercase text-black/70">
+              <label htmlFor="contact-service" className="text-[0.65rem] font-bold tracking-widest uppercase text-black/70">
                 What's brewing?
               </label>
-              <select name="service" defaultValue=""
+              <select id="contact-service" name="service" aria-label="What's brewing? Select a service blend" defaultValue=""
                 className={`${fieldCls('service')} cursor-none appearance-none`}
                 style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23000' d='M6 8L0 0h12z'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 20px center' }}>
                 <option value="" disabled>Pick a blend</option>
@@ -144,10 +144,10 @@ export default function Contact() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-[0.65rem] font-bold tracking-widest uppercase text-black/70">
+              <label htmlFor="contact-brief" className="text-[0.65rem] font-bold tracking-widest uppercase text-black/70">
                 The Brief
               </label>
-              <textarea name="brief" rows={5}
+              <textarea id="contact-brief" name="brief" rows={5}
                 placeholder="Spill it. What's the idea, the problem, the dream?"
                 className={fieldCls('brief')} />
             </div>

@@ -12,7 +12,7 @@ const teamRoles = [
 ];
 
 export default function Team() {
-  const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
+  const [ref] = useInView({ threshold: 0.1, triggerOnce: true });
 
   return (
     <section id="team" className="py-[120px] border-b border-black/10 bg-white/10 backdrop-blur-sm relative z-10" ref={ref}>

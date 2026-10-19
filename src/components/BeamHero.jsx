@@ -85,29 +85,7 @@ export default function BeamHero() {
     });
   }, []);
 
-  const [videoMuted, setVideoMuted] = useState(true);
-  const [videoPlaying, setVideoPlaying] = useState(true);
   const [cinemaModalOpen, setCinemaModalOpen] = useState(false);
-  const cardVideoRef = useRef(null);
-
-  const toggleSound = useCallback((e) => {
-    e?.stopPropagation();
-    if (!cardVideoRef.current) return;
-    const nextMuted = !cardVideoRef.current.muted;
-    cardVideoRef.current.muted = nextMuted;
-    setVideoMuted(nextMuted);
-  }, []);
-
-  const togglePlay = useCallback((e) => {
-    e?.stopPropagation();
-    if (!cardVideoRef.current) return;
-    if (cardVideoRef.current.paused) {
-      cardVideoRef.current.play().then(() => setVideoPlaying(true)).catch(() => {});
-    } else {
-      cardVideoRef.current.pause();
-      setVideoPlaying(false);
-    }
-  }, []);
 
   const openCinemaModal = useCallback((e) => {
     e?.stopPropagation();
@@ -410,7 +388,6 @@ export default function BeamHero() {
         state.lastTime = performance.now();
         state.rafId = requestAnimationFrame(draw);
       }
-      cardVideoRef.current?.play().catch(() => {});
     };
 
     const stopAnimation = () => {
@@ -418,7 +395,6 @@ export default function BeamHero() {
         cancelAnimationFrame(state.rafId);
         state.rafId = null;
       }
-      cardVideoRef.current?.pause();
     };
 
     const observer = new IntersectionObserver(
@@ -546,8 +522,8 @@ export default function BeamHero() {
               highlightColor="rgb(247, 49, 165)"
               highlightMode="motion"
               shape="circle"
-              particleSize={2.2}
-              density={3}
+              particleSize={2.4}
+              density={2}
               scatter={160}
               gatherDuration={1500}
               stagger={380}
@@ -670,29 +646,16 @@ export default function BeamHero() {
             </div>
 
             <div className="flex items-center gap-1.5">
-              {/* Sound Toggle Button */}
+              {/* Play / Expand button */}
               <button
                 type="button"
-                onClick={toggleSound}
-                aria-label={videoMuted ? "Unmute audio" : "Mute audio"}
-                title={videoMuted ? "Unmute Sound" : "Mute Sound"}
-                className="w-6 h-6 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center text-[11px] text-[#111318] transition-colors cursor-pointer"
-              >
-                {videoMuted ? '🔇' : '🔊'}
-              </button>
-
-              {/* Play / Pause Toggle Button */}
-              <button
-                type="button"
-                onClick={togglePlay}
-                aria-label={videoPlaying ? "Pause video" : "Play video"}
-                title={videoPlaying ? "Pause" : "Play"}
+                onClick={openCinemaModal}
+                aria-label="Play showreel fullscreen"
+                title="Watch Fullscreen"
                 className="w-6 h-6 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center text-[10px] text-[#111318] transition-colors cursor-pointer"
               >
-                {videoPlaying ? '⏸' : '▶'}
+                ▶
               </button>
-
-              {/* Expand to Cinema Mode */}
               <button
                 type="button"
                 onClick={openCinemaModal}
@@ -705,28 +668,34 @@ export default function BeamHero() {
             </div>
           </div>
 
-          {/* Video Preview Frame */}
+          {/* Video Preview Frame / Poster */}
           <div
             onClick={openCinemaModal}
             className="relative aspect-video rounded-xl md:rounded-2xl overflow-hidden bg-black cursor-pointer group/vid shadow-inner"
           >
-            <video
-              ref={cardVideoRef}
-              autoPlay
-              muted={videoMuted}
-              loop
-              playsInline
-              preload="metadata"
-              className="w-full h-full object-cover transition-transform duration-700 group-hover/vid:scale-105"
-            >
-              <source src="/videos/showreel-2024.mp4" type="video/mp4" />
-              <source src="/videos/Filter%20Coffee%20Co.%20Showreel%202024.mp4" type="video/mp4" />
-            </video>
+            <picture>
+              <source srcSet="/images/showreel-poster.webp" type="image/webp" />
+              <img
+                src="/images/showreel-poster-thumb.jpg"
+                alt="Filter Coffee Co. Showreel"
+                width={380}
+                height={214}
+                loading="eager"
+                decoding="async"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover/vid:scale-105"
+              />
+            </picture>
+
+            {/* Centered play button overlay */}
+            <div className="absolute inset-0 bg-black/20 group-hover/vid:bg-black/40 transition-colors duration-300 flex items-center justify-center">
+              <span className="w-10 h-10 rounded-full bg-black/75 group-hover/vid:bg-black/95 backdrop-blur-md flex items-center justify-center text-white text-xs pl-0.5 border border-white/25 transition-transform group-hover/vid:scale-110 shadow-lg">
+                ▶
+              </span>
+            </div>
 
             {/* Hover overlay teaser */}
-            <div className="absolute inset-0 bg-black/25 opacity-0 group-hover/vid:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
-              <span className="glass-pill px-3 py-1 rounded-full text-[0.62rem] font-bold uppercase tracking-wider text-white bg-black/70 backdrop-blur-md flex items-center gap-1.5 shadow-lg">
-                <span>▶</span>
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 opacity-0 group-hover/vid:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none whitespace-nowrap">
+              <span className="glass-pill px-3 py-1 rounded-full text-[0.62rem] font-bold uppercase tracking-wider text-white bg-black/80 backdrop-blur-md flex items-center gap-1.5 shadow-lg">
                 <span>Click to Expand</span>
               </span>
             </div>

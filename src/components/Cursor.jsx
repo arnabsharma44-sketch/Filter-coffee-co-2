@@ -7,12 +7,14 @@ import TextCursor from './TextCursor';
  */
 export default function Cursor() {
   const dotRef = useRef(null);
-  const [isTouch, setIsTouch] = useState(false);
+  const [isTouch] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  });
 
   useEffect(() => {
-    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+    if (isTouch) {
       document.body.style.cursor = 'auto';
-      setIsTouch(true);
       return;
     }
 

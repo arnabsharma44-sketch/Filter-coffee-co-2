@@ -158,31 +158,11 @@ export default function Navbar() {
                       >
                         <span className="text-[0.72rem] font-sans font-bold text-brand-navy tracking-[0.18em] uppercase transition-colors group-hover/item:text-brand-yellow leading-tight">
                           {l.label}
-                          {l.subLinks && (
-                            <span className="ml-1 text-[0.6rem] opacity-50">▾</span>
-                          )}
                         </span>
                       </Link>
-                      {l.subLinks && (
-                        <div className="absolute top-full left-1/2 -translate-x-1/2 pt-5 opacity-0 -translate-y-2 pointer-events-none group-hover/item:opacity-100 group-hover/item:translate-y-0 group-hover/item:pointer-events-auto transition-all duration-200 ease-out">
-                          <div className="bg-white/97 backdrop-blur-xl rounded-2xl shadow-2xl border border-black/6 py-4 px-6 min-w-[220px] flex flex-col gap-[2px]">
-                            {l.subLinks.map((sub) => (
-                              <Link
-                                key={sub.to}
-                                to={sub.to}
-                                className="text-[0.72rem] font-semibold text-black/60 hover:text-black hover:bg-black/5 transition-all whitespace-nowrap tracking-[0.08em] uppercase px-3 py-2.5 rounded-lg"
-                              >
-                                {sub.label}
-                              </Link>
-                            ))}
-                          </div>
-                        </div>
-                      )}
                     </li>
                   ))}
                 </ul>
-
-
               </motion.div>
             )}
           </AnimatePresence>
@@ -198,7 +178,7 @@ export default function Navbar() {
                 transition={{ duration: 0.2 }}
                 className="md:hidden flex flex-col gap-[6px] p-2 ml-auto"
                 onClick={() => setOpen((o) => !o)}
-                aria-label="menu"
+                aria-label="Toggle navigation menu"
               >
                 <motion.span
                   animate={open ? { rotate: 45, y: 6.5 } : { rotate: 0, y: 0 }}
@@ -245,19 +225,6 @@ export default function Navbar() {
                   >
                     {l.label}
                   </Link>
-                  {l.subLinks && (
-                    <div className="flex flex-col gap-4 mt-4 pl-4 border-l-[1.5px] border-black/10">
-                      {l.subLinks.map((sub) => (
-                        <Link
-                          key={sub.to}
-                          to={sub.to}
-                          className="text-[0.8rem] tracking-wide font-semibold text-black/60 transition-colors uppercase"
-                        >
-                          {sub.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
                 </div>
               ))}
 

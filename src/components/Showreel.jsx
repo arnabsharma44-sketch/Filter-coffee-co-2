@@ -1,4 +1,4 @@
-import ScrollReveal from './ScrollReveal';
+import { motion } from 'framer-motion';
 
 export default function Showreel() {
   return (
@@ -20,23 +20,21 @@ export default function Showreel() {
             </span>
           </div>
 
-          {/* ── Content Narrative Context with ScrollReveal ── */}
+          {/* ── Content Narrative Context ── */}
           <div className="relative z-[2] w-full max-w-[1100px]">
-            <ScrollReveal
-              baseOpacity={0.15}
-              enableBlur={true}
-              blurStrength={3}
-              baseRotation={0}
-              start="top 85%"
-              end="bottom 50%"
-              textClassName="text-[clamp(1.9rem,3.8vw,3.8rem)] font-serif italic font-normal leading-[1.32] tracking-tight text-white mb-2"
+            <motion.p
+              initial={{ opacity: 0.15, y: 30, filter: 'blur(3px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              className="text-[clamp(1.9rem,3.8vw,3.8rem)] font-serif italic font-normal leading-[1.32] tracking-tight text-white mb-2"
             >
               We’re an advertising and social media agency blending{' '}
               <span className="font-sans not-italic font-black text-brand-yellow">strategy</span>,{' '}
               <span className="font-sans not-italic font-black text-white">creativity</span> and{' '}
               <span className="font-sans not-italic font-black text-[#f731a5]">culture</span>{' '}
               to create work that gets seen, shared, saved and remembered.
-            </ScrollReveal>
+            </motion.p>
           </div>
 
           {/* ── Subtle Decorative Watermark / Accent in bottom right ── */}
