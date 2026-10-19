@@ -57,19 +57,19 @@ export default function ClientsPage() {
           <div>
             <div className="flex items-center gap-4 text-[0.7rem] font-bold tracking-widest2 uppercase text-smoke mb-6">
               <span className="w-10 h-px bg-brand-navy/30 inline-block" />
-              The Roster
+              OUR CLIENTS
             </div>
             <ScrollReveal
               baseOpacity={0.1} enableBlur baseRotation={3} blurStrength={4}
               textClassName="text-[clamp(3rem,7vw,7rem)] font-black leading-[0.95] tracking-[-0.04em] mb-6 text-brand-navy"
             >
-              Brands we've brewed with.
+              OUR CLIENTS
             </ScrollReveal>
             <ScrollReveal
               baseOpacity={0.1} enableBlur baseRotation={0} blurStrength={2}
               textClassName="text-smoke text-lg max-w-xl leading-relaxed font-medium"
             >
-              50+ brands. Countless campaigns. One shared obsession — making great work.
+              From skincare shelves to social feeds, we’ve partnered with brands to serve ideas that keep conversations brewing.
             </ScrollReveal>
           </div>
         </div>

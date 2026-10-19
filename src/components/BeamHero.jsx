@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
+import ParticleText from './ParticleText';
 
 /**
  * BeamHero — Generative Spectral Prism Light Beam Hero for Filter Coffee Co.
@@ -520,10 +521,10 @@ export default function BeamHero() {
         }}
       />
 
-      {/* ── Choreographed Hero Content (FCC First -> Tagline Beneath It) ── */}
-      <main className="absolute left-[6.5vw] md:left-[4.7vw] top-[26vh] md:top-[30vh] z-[2] max-w-[85vw] md:max-w-[760px] flex flex-col gap-4 md:gap-6 pointer-events-none">
+      {/* ── Choreographed Hero Content (Espresso Your Creativity -> Brand Story) ── */}
+      <main className="absolute left-[6.5vw] md:left-[4.7vw] top-[24vh] md:top-[28vh] z-[2] max-w-[88vw] md:max-w-[780px] flex flex-col gap-4 md:gap-5 pointer-events-none">
         
-        {/* Step 1: FCC Mark (Slides in from the left side of the window in full motion) */}
+        {/* Step 1: Espresso Your Creativity (Animated with ParticleText from React Bits) */}
         <div
           id="mark"
           onTransitionEnd={() => updateCachedOrigin()}
@@ -532,9 +533,34 @@ export default function BeamHero() {
             opacity: introState.fccIn ? 1 : 0,
             transition: 'transform 1.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease-out'
           }}
-          className="text-[clamp(36px,4.5vw,74px)] font-[750] tracking-[-0.065em] leading-none whitespace-nowrap pointer-events-auto cursor-default text-[#111318] group select-none flex items-baseline"
+          className="relative pointer-events-auto cursor-pointer group select-none w-full max-w-[760px]"
         >
-          <span>filter coffee co</span>
+          <div className="w-full h-[145px] sm:h-[165px] md:h-[195px] lg:h-[220px] relative">
+            <ParticleText
+              text={"Espresso Your\nCreativity"}
+              align="left"
+              fontSize="clamp(34px, 4.8vw, 70px)"
+              fontWeight={800}
+              fontFamily="'Outfit', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif"
+              color="#111318"
+              highlightColor="rgb(247, 49, 165)"
+              highlightMode="motion"
+              shape="circle"
+              particleSize={2.2}
+              density={3}
+              scatter={160}
+              gatherDuration={1500}
+              stagger={380}
+              pointerRepel={44}
+              repelRadius={125}
+              idleDrift={0.65}
+              clickBurst={true}
+              burstStrength={1.2}
+              glow={true}
+              trigger="hover"
+            />
+          </div>
+
           <span
             ref={dotRef}
             id="originDot"
@@ -544,23 +570,29 @@ export default function BeamHero() {
                 : '0 0 0 rgba(0,0,0,0)',
               transition: 'box-shadow 1.0s ease-out'
             }}
-            className="inline-block w-[0.155em] h-[0.155em] rounded-full ml-[0.035em] align-[0.09em] bg-[#111318] transition-transform duration-300 ease-out group-hover:scale-125"
+            className="absolute left-[340px] sm:left-[390px] md:left-[450px] bottom-[12px] w-[9px] h-[9px] rounded-full bg-[#111318] transition-transform duration-300 ease-out group-hover:scale-125"
           />
         </div>
 
-        {/* Step 2: Tagline Beneath It (Fades & glides in smoothly after FCC arrives) */}
-        <h1
+        {/* Step 2: Brand Story Copy (Fades & glides in smoothly after headline arrives) */}
+        <div
           style={{
-            transform: introState.taglineIn ? 'translateY(0)' : 'translateY(32px)',
+            transform: introState.taglineIn ? 'translateY(0)' : 'translateY(28px)',
             opacity: introState.taglineIn ? 1 : 0,
             transition: 'transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1)'
           }}
-          className="font-[420] text-[clamp(28px,3.2vw,56px)] leading-[1.08] tracking-[-0.045em] text-[#111318]/90 m-0"
+          className="flex flex-col gap-1.5 md:gap-2.5 text-[clamp(16px,1.8vw,26px)] leading-[1.32] tracking-[-0.025em] text-[#111318]/90 font-medium pt-1"
         >
-          Creativity looks
-          <br />
-          different from here.
-        </h1>
+          <p className="m-0 text-[#111318]/90 font-semibold">
+            Yes, our name is Filter Coffee Co.
+          </p>
+          <p className="m-0 text-[#111318]/60 font-normal">
+            No, we don't make coffee.
+          </p>
+          <p className="m-0 text-[#111318] font-black text-[clamp(18px,2.1vw,30px)] tracking-[-0.03em] pt-1">
+            We make brands addictive.
+          </p>
+        </div>
       </main>
 
       {/* ── Scroll Indicator (Fades in with UI) ── */}

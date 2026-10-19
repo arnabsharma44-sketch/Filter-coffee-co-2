@@ -60,24 +60,39 @@ export default function Contact() {
         >
           <div className="inline-flex items-center gap-2.5 text-[0.68rem] font-bold tracking-widest2 uppercase text-smoke mb-6 glass-pill px-4 py-1.5 rounded-full">
             <span className="w-2 h-2 rounded-full bg-brand-yellow inline-block animate-pulse" />
-            GOT A BRIEF?
+            START A CONVERSATION
           </div>
 
-          <h1 className="text-[clamp(2.8rem,6.2vw,6rem)] font-black leading-[1.08] tracking-[-0.035em] text-black mb-3">
-            Spill the beans.
-          </h1>
-          <h2 className="text-[clamp(2.4rem,5.4vw,5.2rem)] font-serif italic font-light text-black/75 leading-[1.12] tracking-tight mb-8">
-            We'll brew the idea.
+          <h2 className="text-[clamp(2.8rem,6vw,5.5rem)] font-black leading-[0.98] tracking-[-0.035em] text-black uppercase mb-3">
+            GOT A BRIEF?
           </h2>
+          <h3 className="text-[clamp(2rem,4.2vw,3.8rem)] font-serif italic font-light text-black/80 leading-[1.1] tracking-tight mb-8">
+            Let’s make it a big deal.
+          </h3>
 
-          <p className="text-smoke text-base md:text-lg max-w-lg mx-auto leading-relaxed mb-10 font-medium">
-            New campaign? Social needs a refresh? Launch loading? Or just an idea sitting in your notes app?
-            Slide into our inbox.
+          <div className="flex flex-wrap justify-center gap-2.5 max-w-2xl mx-auto mb-8">
+            {[
+              'New campaign?',
+              'Social refresh?',
+              'Launch loading?',
+              'Idea sitting in your Notes app?',
+            ].map((q) => (
+              <span
+                key={q}
+                className="glass-pill px-4 py-2 rounded-full text-xs md:text-sm font-semibold text-black/75 border border-black/10 bg-white/60 shadow-sm"
+              >
+                {q}
+              </span>
+            ))}
+          </div>
+
+          <p className="text-xl md:text-2xl font-black text-black tracking-tight mb-8">
+            We’re all ears.
           </p>
 
           <a href="mailto:hello@filtercoffeeco.in"
             className="mag-btn border border-black bg-black text-white text-[0.78rem] font-black
-              tracking-widest uppercase px-12 py-5 cursor-none mx-auto rounded-full shadow-lg inline-flex">
+              tracking-widest uppercase px-12 py-5 cursor-none mx-auto rounded-full shadow-lg inline-flex hover:bg-brand-yellow hover:text-black hover:border-brand-yellow transition-all duration-300">
             <span>SEND THE BRIEF</span>
             <span className="ml-2">→</span>
           </a>

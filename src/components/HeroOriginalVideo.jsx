@@ -42,12 +42,12 @@ export default function HeroOriginalVideo() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute top-[100px] md:top-[120px] left-6 md:left-12 max-w-[280px] z-10"
+        className="absolute top-[100px] md:top-[120px] left-6 md:left-12 max-w-[340px] z-10"
       >
-        <p className="text-[0.8rem] md:text-[0.95rem] font-sans font-medium text-brand-cream leading-snug tracking-tight">
-          Creative Agency. <br/>
-          We make brands a damn sight better. <br/>
-          (Or in our case, addictive.)
+        <p className="text-[0.82rem] md:text-[0.95rem] font-sans font-medium text-brand-cream leading-snug tracking-tight">
+          Yes, our name is Filter Coffee Co.<br/>
+          No, we don't make coffee.<br/>
+          <span className="font-bold text-brand-yellow">We make brands addictive.</span>
         </p>
       </motion.div>
 
@@ -56,7 +56,7 @@ export default function HeroOriginalVideo() {
         style={{ y: y1 }}
         className="relative z-10 w-full max-w-[1600px] mx-auto mt-[10vh] md:mt-[5vh] flex flex-col items-start"
       >
-        <h1 className="text-[clamp(4.5rem,14vw,18rem)] font-display font-normal leading-[0.85] text-brand-cream uppercase">
+        <h1 className="text-[clamp(3.8rem,11vw,14rem)] font-display font-normal leading-[0.88] text-brand-cream uppercase">
           
           <div className="overflow-hidden">
             <motion.div 
@@ -65,7 +65,7 @@ export default function HeroOriginalVideo() {
               transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="flex items-center gap-2 md:gap-6"
             >
-              <span>we make</span>
+              <span>Espresso</span>
             </motion.div>
           </div>
 
@@ -92,7 +92,7 @@ export default function HeroOriginalVideo() {
                   <source src="https://res.cloudinary.com/qxtrlo6i/video/upload/v1791541217/hero-pill.mp4" type="video/mp4" />
                 </video>
               </motion.div>
-              <span>brands</span>
+              <span>Your</span>
             </motion.div>
           </div>
 
@@ -103,7 +103,7 @@ export default function HeroOriginalVideo() {
               transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               className="flex items-center gap-2 md:gap-6"
             >
-              <span>addictive.</span>
+              <span>Creativity.</span>
             </motion.div>
           </div>
 

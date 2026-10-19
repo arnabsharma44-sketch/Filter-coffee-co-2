@@ -1,15 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
+import TextCursor from './TextCursor';
 
 /**
- * Custom cursor — optimised version.
- *
- * Only runs rAF while the mouse is actually moving. Pauses after 100ms idle
- * to avoid burning CPU/GPU when the cursor is stationary.
- * On touch devices, nothing renders and default cursor is restored.
+ * Custom Cursor with TextCursor integration from React Bits.
+ * Displays a sleek trailing "FCC" stamp trail with an optional precision point.
  */
 export default function Cursor() {
-  const dot  = useRef(null);
-  const ring = useRef(null);
+  const dotRef = useRef(null);
   const [isTouch, setIsTouch] = useState(false);
 
   useEffect(() => {
@@ -19,82 +16,48 @@ export default function Cursor() {
       return;
     }
 
-    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
-    let rx = mx, ry = my;
-    let raf = null;
-    let idleTimer = null;
-    let running = false;
-
-    const loop = () => {
-      rx += (mx - rx) * 0.18;
-      ry += (my - ry) * 0.18;
-
-      if (dot.current) {
-        dot.current.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%,-50%)`;
-      }
-      if (ring.current) {
-        ring.current.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%,-50%)`;
-      }
-
-      // Stop rAF loop when ring has caught up (close enough)
-      if (Math.abs(mx - rx) < 0.5 && Math.abs(my - ry) < 0.5) {
-        running = false;
-        return;
-      }
-
-      raf = requestAnimationFrame(loop);
-    };
-
-    const startLoop = () => {
-      if (!running) {
-        running = true;
-        raf = requestAnimationFrame(loop);
+    const onMouseMove = (e) => {
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
       }
     };
 
-    const onMove = (e) => {
-      mx = e.clientX;
-      my = e.clientY;
-      if (dot.current) {
-        dot.current.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%, -50%)`;
-      }
-      startLoop();
-    };
-
-    window.addEventListener('mousemove', onMove, { passive: true });
-
-    // Fast hover detection
-    const onOver = (e) => {
-      const el = e.target;
-      if (el && (el.tagName === 'A' || el.tagName === 'BUTTON' || el.closest('a, button, .mag-btn, .work-card, .logo-slot'))) {
-        if (ring.current) ring.current.classList.add('hovered');
-      }
-    };
-    const onOut = (e) => {
-      const el = e.target;
-      if (el && (el.tagName === 'A' || el.tagName === 'BUTTON' || el.closest('a, button, .mag-btn, .work-card, .logo-slot'))) {
-        if (ring.current) ring.current.classList.remove('hovered');
-      }
-    };
-
-    document.addEventListener('mouseover', onOver, { passive: true });
-    document.addEventListener('mouseout', onOut, { passive: true });
-
-    return () => {
-      window.removeEventListener('mousemove', onMove);
-      document.removeEventListener('mouseover', onOver);
-      document.removeEventListener('mouseout', onOut);
-      if (raf) cancelAnimationFrame(raf);
-      if (idleTimer) clearTimeout(idleTimer);
-    };
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+    return () => window.removeEventListener('mousemove', onMouseMove);
   }, []);
 
   if (isTouch) return null;
 
   return (
     <>
-      <div ref={dot}  className="cursor-dot" style={{ top: 0, left: 0 }} />
-      <div ref={ring} className="cursor-ring" style={{ top: 0, left: 0 }} />
+      {/* Precision Tip Dot */}
+      <div
+        ref={dotRef}
+        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-[#111318] pointer-events-none z-[100000] will-change-transform"
+      />
+
+      {/* React Bits TextCursor Stamp Trail */}
+      <div className="fixed inset-0 pointer-events-none z-[99999] overflow-hidden text-cursor--global">
+        <TextCursor
+          text="FCC"
+          mode="stamp"
+          fontSize={22}
+          fontWeight={800}
+          color="#111318"
+          fontFamily="Outfit, 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif"
+          spacing={76}
+          maxPoints={7}
+          shrink={0.5}
+          fade={0.65}
+          smoothing={0.25}
+          exitDuration={0.45}
+          removalInterval={28}
+          followMouseDirection={true}
+          keepUpright={true}
+          randomFloat={true}
+          popIn={true}
+        />
+      </div>
     </>
   );
 }

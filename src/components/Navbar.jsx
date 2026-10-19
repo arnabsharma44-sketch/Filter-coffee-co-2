@@ -4,17 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const links = [
   { label: 'About',       to: '/about'    },
-  { 
-    label: 'Work',        
-    to: '/work',
-    subLinks: [
-      { label: 'Social Media', to: '/work/social-media' },
-      { label: '3D Animation', to: '/work/3d-animation' },
-      { label: 'CGI Animation', to: '/work/cgi-animation' },
-      { label: 'E-Commerce and Digital', to: '/work/ecommerce-digital' },
-      { label: 'Campaign Shoots', to: '/work/campaign-shoots' }
-    ]
-  },
+  { label: 'Work',        to: '/work'     },
   { label: 'Our Clients', to: '/clients'  },
   { label: 'Contact',     to: '/contact'  },
 ];
@@ -59,6 +49,18 @@ export default function Navbar() {
   useEffect(() => {
     setOpen(false);
   }, [location.pathname]);
+
+  const handleNavClick = (e, link) => {
+    if (location.pathname === '/') {
+      const targetId = link.to.replace('/', '');
+      const el = document.getElementById(targetId);
+      if (el) {
+        e.preventDefault();
+        el.scrollIntoView({ behavior: 'smooth' });
+        setOpen(false);
+      }
+    }
+  };
 
   const handlePillClick = (e) => {
     if (!minimized) return;
@@ -149,6 +151,7 @@ export default function Navbar() {
                     <li key={l.to} className="relative group/item">
                       <Link
                         to={l.to}
+                        onClick={(e) => handleNavClick(e, l)}
                         className={`group flex items-center relative transition-opacity ${
                           location.pathname === l.to ? 'opacity-100 font-extrabold' : 'opacity-85 hover:opacity-100'
                         }`}
@@ -236,6 +239,7 @@ export default function Navbar() {
                 <div key={l.to} className="flex flex-col border-b border-black/8 pb-3.5">
                   <Link
                     to={l.to}
+                    onClick={(e) => handleNavClick(e, l)}
                     className={`text-lg font-semibold text-black transition-colors
                       ${location.pathname === l.to ? 'opacity-100 font-bold' : 'opacity-70'}`}
                   >

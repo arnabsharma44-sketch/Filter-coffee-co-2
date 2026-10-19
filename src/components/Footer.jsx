@@ -75,13 +75,34 @@ export default function Footer() {
           ))}
         </nav>
 
-        {/* Right copy */}
-        <div className="text-right">
-          <p className="text-[0.65rem] font-medium text-white/40 leading-snug">
-            Proudly created in India
-          </p>
-          <p className="text-[0.65rem] font-medium text-white/40 leading-snug">
-            All Rights Reserved. All Wrong Reserved.
+        {/* Right copy & Developer Credits */}
+        <div className="flex flex-col items-start md:items-end gap-1.5 text-left md:text-right">
+          <div className="flex flex-wrap items-center gap-1.5 text-[0.7rem] tracking-wider font-semibold text-white/80">
+            <span className="text-white/40 uppercase text-[0.62rem] font-medium">Developed by</span>
+            <span className="text-white font-bold tracking-wide">JINENDRA BANTHIA</span>
+            <span className="text-white/40">&</span>
+            <span className="text-white font-bold tracking-wide">ARNAV SHARMA</span>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2.5 text-[0.65rem] font-medium text-white/60">
+            <a
+              href="tel:9124483008"
+              className="hover:text-brand-yellow transition-colors inline-flex items-center gap-1"
+            >
+              <span className="text-brand-yellow">✦</span>
+              <span>9124483008</span>
+            </a>
+            <span className="text-white/20">•</span>
+            <a
+              href="mailto:jinendra.banthia.iter@gmail.com"
+              className="hover:text-brand-yellow transition-colors underline decoration-white/20 hover:decoration-brand-yellow"
+            >
+              jinendra.banthia.iter@gmail.com
+            </a>
+          </div>
+
+          <p className="text-[0.62rem] font-medium text-white/30 pt-0.5">
+            Proudly created in India • All Rights Reserved.
           </p>
         </div>
       </div>

@@ -31,33 +31,21 @@ export default function About({ hideHeader = false }) {
 
   return (
     <>
-      {/* ── ABOUT / OUR BLEND ── */}
-      <section id="about" className="py-[120px] border-b border-black/10 bg-transparent relative z-10">
+      {/* ── OUR CLIENTS ── */}
+      <section id="clients" className="py-[120px] border-b border-black/10 bg-transparent relative z-10">
         <BackgroundShapes variant="about" />
         <div className="max-w-[1360px] mx-auto px-8 md:px-12">
           {!hideHeader && (
           <motion.div ref={hRef}
             initial={{ opacity: 0, y: 40 }}
             animate={hInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.16,1,0.3,1] }}>
-            <p className="text-[0.68rem] font-bold tracking-widest2 uppercase text-smoke mb-4">
-              OUR BLEND
-            </p>
-            <h2 className="text-[clamp(2.8rem,5vw,5.5rem)] font-black leading-[1.02] tracking-tight text-black mb-6">
-              From skincare shelves
-            </h2>
-            <h2 className="text-[clamp(2.8rem,5vw,5.5rem)] font-extralight italic text-black/70 leading-[1.02] tracking-tight mb-6">
-              to social feeds.
-            </h2>
-            <p className="text-smoke text-lg max-w-xl leading-relaxed font-medium">
-              We've partnered with brands to serve ideas that keep conversations brewing.
-            </p>
-          </motion.div>
-          )}
-
-          {/* Client Logo Wall */}
-          <div id="clients" className="mt-20">
-            <div className="text-[clamp(2.8rem,5vw,5.5rem)] font-black leading-[1.02] tracking-tight text-black mb-10">
+            transition={{ duration: 0.8, ease: [0.16,1,0.3,1] }}
+            className="mb-14">
+            <div className="inline-flex items-center gap-2.5 text-[0.68rem] font-bold tracking-widest2 uppercase text-smoke mb-6 glass-pill px-4 py-1.5 rounded-full">
+              <span className="w-2 h-2 rounded-full bg-brand-yellow inline-block animate-pulse" />
+              PARTNERSHIPS
+            </div>
+            <div className="text-[clamp(2.8rem,5.5vw,5.5rem)] font-black leading-[0.98] tracking-tight text-black mb-6">
               <FoldText
                 text="OUR CLIENTS"
                 splitBy="char"
@@ -72,8 +60,14 @@ export default function About({ hideHeader = false }) {
                 fontWeight={900}
               />
             </div>
-            <LogoGrid />
-          </div>
+            <p className="text-smoke text-lg md:text-xl max-w-2xl leading-relaxed font-medium">
+              From skincare shelves to social feeds, we’ve partnered with brands to serve ideas that keep conversations brewing.
+            </p>
+          </motion.div>
+          )}
+
+          {/* Client Logo Wall */}
+          <LogoGrid />
         </div>
       </section>
     </>

@@ -19,19 +19,19 @@ export default function WorkPage() {
           <div>
             <div className="flex items-center gap-4 text-[0.7rem] font-bold tracking-widest2 uppercase text-smoke mb-6">
               <span className="w-10 h-px bg-brand-navy/30 inline-block" />
-              Portfolio
+              THE GOOD STUFF
             </div>
             <ScrollReveal
               baseOpacity={0.1} enableBlur baseRotation={3} blurStrength={4}
               textClassName="text-[clamp(3rem,7vw,7rem)] font-black leading-[0.95] tracking-[-0.04em] mb-6 text-brand-navy"
             >
-              Work worth a double tap.
+              THE GOOD STUFF
             </ScrollReveal>
             <ScrollReveal
               baseOpacity={0.1} enableBlur baseRotation={0} blurStrength={2}
               textClassName="text-smoke text-lg max-w-xl leading-relaxed font-medium"
             >
-              A fresh pour of campaigns, content and social-first ideas we've brewed for brands.
+              Ideas that left the deck and made it to feeds, screens and conversations.
             </ScrollReveal>
           </div>
         </div>

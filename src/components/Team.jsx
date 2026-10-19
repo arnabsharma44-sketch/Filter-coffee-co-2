@@ -15,34 +15,38 @@ export default function Team() {
   const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
 
   return (
-    <section className="py-[120px] border-b border-black/10 bg-white/10 backdrop-blur-sm relative z-10" ref={ref}>
+    <section id="team" className="py-[120px] border-b border-black/10 bg-white/10 backdrop-blur-sm relative z-10" ref={ref}>
       <BackgroundShapes variant="team" />
       <div className="max-w-[1360px] mx-auto px-8 md:px-12">
 
-        {/* Brew Crew */}
+        {/* Team Intro */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.8, ease: [0.16,1,0.3,1] }}
           className="text-center mb-16">
-          <p className="text-[0.68rem] font-bold tracking-widest2 uppercase text-smoke mb-6">
-            MEET THE BREW CREW
-          </p>
-          <div className="flex flex-wrap justify-center gap-1 mb-6">
+          <div className="inline-flex items-center gap-2.5 text-[0.68rem] font-bold tracking-widest2 uppercase text-smoke mb-5 glass-pill px-4 py-1.5 rounded-full mx-auto">
+            <span className="w-2 h-2 rounded-full bg-brand-yellow inline-block animate-pulse" />
+            OUR PEOPLE
+          </div>
+          <h2 className="text-[clamp(2.8rem,5.5vw,5.5rem)] font-black leading-[0.98] tracking-[-0.035em] uppercase text-black mb-8">
+            MEET THE TEAM
+          </h2>
+          <div className="flex flex-wrap justify-center gap-1 mb-6 max-w-4xl mx-auto">
             {teamRoles.map((r, i) => (
               <motion.span key={r}
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.07, duration: 0.5 }}
-                className={`text-[clamp(1rem,1.8vw,1.6rem)] font-light tracking-tight
-                  ${i === teamRoles.length - 1 ? 'italic font-semibold text-black' : 'text-smoke'} px-2`}>
+                className={`text-[clamp(1.05rem,1.9vw,1.7rem)] font-light tracking-tight
+                  ${i === teamRoles.length - 1 ? 'italic font-bold text-black' : 'text-smoke'} px-2`}>
                 {r}
               </motion.span>
             ))}
           </div>
-          <p className="text-smoke text-base max-w-md mx-auto leading-relaxed">
+          <p className="text-smoke text-base md:text-lg max-w-lg mx-auto leading-relaxed font-medium">
             Different roles. Different playlists. Different coffee orders.<br />
             <strong className="text-black font-semibold">One shared obsession: making good work.</strong>
           </p>

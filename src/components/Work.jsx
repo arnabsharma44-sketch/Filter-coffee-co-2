@@ -100,25 +100,20 @@ export default function Work({ hideHeader = false }) {
           transition={{ duration: 0.8, ease: [0.16,1,0.3,1] }}
           className="mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
-            <p className="text-[0.68rem] font-bold tracking-widest2 uppercase text-smoke mb-4">
-              FRESHLY BREWED
+            <div className="inline-flex items-center gap-2.5 text-[0.68rem] font-bold tracking-widest2 uppercase text-smoke mb-4 glass-pill px-4 py-1.5 rounded-full">
+              <span className="w-2 h-2 rounded-full bg-brand-yellow inline-block animate-pulse" />
+              PORTFOLIO
+            </div>
+            <ScrollFloat
+              animationDuration={3}
+              textClassName="text-[clamp(2.8rem,5.5vw,5.5rem)] font-black leading-[0.98] tracking-[-0.04em] text-black uppercase"
+            >
+              THE GOOD STUFF
+            </ScrollFloat>
+            <p className="text-smoke text-base md:text-xl max-w-2xl leading-relaxed font-medium mt-4">
+              Ideas that left the deck and made it to feeds, screens and conversations.
             </p>
-            <ScrollFloat
-              animationDuration={3}
-              textClassName="text-[clamp(2.8rem,5vw,5.5rem)] font-black leading-[1.02] tracking-tight text-black"
-            >
-              Work worth a
-            </ScrollFloat>
-            <ScrollFloat
-              animationDuration={3}
-              textClassName="text-[clamp(2.8rem,5vw,5.5rem)] font-extralight italic text-black/70 leading-[1.02] tracking-tight"
-            >
-              double tap.
-            </ScrollFloat>
           </div>
-          <p className="text-smoke text-sm max-w-xs leading-relaxed md:text-right font-medium">
-            A fresh pour of campaigns, content and social-first ideas we've brewed for brands.
-          </p>
         </motion.div>
         )}
 
