@@ -5,12 +5,15 @@ import { motion } from 'framer-motion';
  * Hero Component — Video background with mute/unmute functionality.
  * Uses the local video from /videos/homepage/bg%20video%20homepage.mp4
  * SF Pro font only for consistent typography
+ * Optimized for fast loading: preload=metadata, poster image, loading states
  */
 export default function Hero() {
   const videoRef = useRef(null);
   const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showMuteButton, setShowMuteButton] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
 
   // Handle video loaded metadata
   useEffect(() => {
@@ -19,64 +22,140 @@ export default function Hero() {
       video.muted = true;
       video.volume = 1.0;
       
+      const handleCanPlay = () => {
+        setVideoLoaded(true);
+        setVideoError(false);
+      };
+      
+      const handleError = () => {
+        setVideoError(true);
+        setVideoLoaded(false);
+      };
+      
+      video.addEventListener('canplay', handleCanPlay);
+      video.addEventListener('error', handleError);
+      
       // Attempt to play automatically
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise
+
           .then(() => {
             setIsPlaying(true);
             // Show mute button after video starts playing
             setTimeout(() => setShowMuteButton(true), 1000);
           })
+
           .catch(() => {
             // Autoplay was prevented, video will play on user interaction
             setIsPlaying(false);
           });
       }
+      
+      return () => {
+        video.removeEventListener('canplay', handleCanPlay);
+        video.removeEventListener('error', handleError);
+      };
     }
   }, []);
 
+
   const toggleMute = () => {
+
     const video = videoRef.current;
+
     if (video) {
+
       const newMuted = !isMuted;
+
       video.muted = newMuted;
+
       setIsMuted(newMuted);
+
     }
+
   };
+
 
   const handleVideoClick = () => {
+
     const video = videoRef.current;
+
     if (video) {
+
       if (video.paused) {
+
         video.play().then(() => setIsPlaying(true)).catch(() => {});
+
       } else {
+
         video.pause();
+
         setIsPlaying(false);
+
       }
+
     }
+
   };
 
+
   return (
+
     <section
+
       id="home"
+
       className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 pt-[100px] pb-12 overflow-hidden bg-black"
+
       style={{ backgroundColor: '#000000' }}
+
     >
+
       {/* Full landscape background video */}
+
       <div className="absolute inset-0 z-0" aria-hidden="true">
+        {/* Poster image shown while video loads - replace with actual poster */}
+        {!videoLoaded && (
+          <div className="absolute inset-0 bg-black z-10 flex items-center justify-center">
+            <div className="w-12 h-12 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin" aria-hidden="true" />
+          </div>
+        )}
+        
         <video
+
           ref={videoRef}
+
           autoPlay
+
           muted
+
           loop
+
           playsInline
-          preload="auto"
-          className="w-full h-full object-cover"
+
+          preload="metadata"
+
+          className={`w-full h-full object-cover transition-opacity duration-700 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
+
           onClick={handleVideoClick}
+
+          onLoadStart={() => setVideoLoaded(false)}
+
+          onCanPlay={() => setVideoLoaded(true)}
+
+          onError={() => setVideoError(true)}
         >
           <source src="/videos/homepage/bg%20video%20homepage.mp4" type="video/mp4" />
+          {/* Add WebM source for better compression when available */}
+          {/* <source src="/videos/homepage/bg%20video%20homepage.webm" type="video/webm" /> */}
         </video>
+        
+        {/* Fallback static background if video fails to load */}
+        {videoError && (
+          <div className="absolute inset-0 bg-black z-20" aria-hidden="true" />
+        )}
+        
         {/* Enhanced dark gradient overlay for better text readability over video */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80" />
         {/* Subtle vignette for depth */}
@@ -84,13 +163,16 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
       </div>
 
-{
-        /* Bottom CTA / Scroll Indicator */}
+      {/* Bottom CTA / Scroll Indicator */}
       <motion.div
-n        initial={{ opacity: 0 }}
-n        animate={{ opacity: 1 }}
-n        transition={{ delay: 1, duration: 1 }}
-n        className="absolute bottom-8 right-6 md:right-12 flex items-center gap-6 z-10"
+
+        initial={{ opacity: 0 }}
+
+        animate={{ opacity: 1 }}
+
+        transition={{ delay: 1, duration: 1 }}
+
+        className="absolute bottom-8 right-6 md:right-12 flex items-center gap-6 z-10"
       >
         <p className="text-[0.7rem] uppercase font-semibold tracking-widest text-white/50 hidden md:block">
           Scroll to explore
@@ -101,8 +183,8 @@ n        className="absolute bottom-8 right-6 md:right-12 flex items-center gap-
           </svg>
         </a>
       </motion.div>
-{
-      /* Mute/Unmute Button - Bottom Right */}
+
+      {/* Mute/Unmute Button - Bottom Right */}
       {showMuteButton && (
         <button
           onClick={toggleMute}
