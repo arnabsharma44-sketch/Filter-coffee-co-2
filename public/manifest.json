@@ -1,6 +1,6 @@
 {
-  "name": "Filter Coffee Co. — We Make Brands Addictive",
-  "short_name": "Filter Coffee Co.",
+  "name": "Filter Coffee Co.",
+  "short_name": "FCC",
   "description": "Filter Coffee Co. — advertising, social media and ideas worth a double tap. An advertising and social media agency blending strategy, creativity and culture.",
   "start_url": "/",
   "display": "standalone",
@@ -57,7 +57,11 @@
       "purpose": "maskable any"
     }
   ],
-  "categories": ["business", "marketing", "creative"],
+  "categories": [
+    "business",
+    "marketing",
+    "creative"
+  ],
   "screenshots": [],
   "shortcuts": [
     {
@@ -65,14 +69,24 @@
       "short_name": "Work",
       "description": "View our portfolio of campaigns and projects",
       "url": "/#work",
-      "icons": [{ "src": "/icons/work-icon.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "/icons/work-icon.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Contact Us",
       "short_name": "Contact",
       "description": "Get in touch for your next project",
       "url": "/#contact",
-      "icons": [{ "src": "/icons/contact-icon.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "/icons/contact-icon.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }

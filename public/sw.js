@@ -49,6 +49,16 @@ self.addEventListener('fetch', (event) => {
   // Skip non-GET requests
   if (request.method !== 'GET') return;
 
+  // Bypass Service Worker for video and audio so browser can stream natively with HTTP 206 range requests
+  if (
+    request.destination === 'video' || 
+    request.destination === 'audio' || 
+    request.headers.get('range') ||
+    url.pathname.match(/\.(mp4|webm|ogg|mp3|wav)$/i)
+  ) {
+    return;
+  }
+
   // Skip external requests (fonts, analytics, etc.)
   if (url.origin !== location.origin) {
     // For fonts, use stale-while-revalidate
