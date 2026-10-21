@@ -58,11 +58,6 @@ export default function Contact() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2.5 text-[0.68rem] font-bold tracking-widest2 uppercase text-smoke mb-6 glass-pill px-4 py-1.5 rounded-full">
-            <span className="w-2 h-2 rounded-full bg-brand-yellow inline-block animate-pulse" />
-            START A CONVERSATION
-          </div>
-
           <h2 className="text-[clamp(2.8rem,6vw,5.5rem)] font-black leading-[0.98] tracking-[-0.035em] text-black uppercase mb-3">
             GOT A BRIEF?
           </h2>

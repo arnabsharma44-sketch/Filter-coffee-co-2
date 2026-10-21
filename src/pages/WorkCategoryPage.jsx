@@ -57,16 +57,7 @@ export default function WorkCategoryPage() {
       <section className="max-w-[1360px] mx-auto px-6 md:px-12 pt-6 pb-16">
         <div className="grid lg:grid-cols-12 gap-12 items-end">
           <div className="lg:col-span-8">
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 text-[0.68rem] font-bold tracking-widest2 uppercase text-smoke mb-6 glass-pill px-4 py-1.5 rounded-full"
-            >
-              <span className="w-2 h-2 rounded-full bg-brand-yellow inline-block animate-pulse" />
-              {category.badge}
-            </motion.div>
+
 
             {/* Main Headline */}
             <motion.h1

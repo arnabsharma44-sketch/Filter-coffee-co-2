@@ -41,10 +41,6 @@ export default function About({ hideHeader = false }) {
             animate={hInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.16,1,0.3,1] }}
             className="mb-14">
-            <div className="inline-flex items-center gap-2.5 text-[0.68rem] font-bold tracking-widest2 uppercase text-smoke mb-6 glass-pill px-4 py-1.5 rounded-full">
-              <span className="w-2 h-2 rounded-full bg-brand-yellow inline-block animate-pulse" />
-              PARTNERSHIPS
-            </div>
             <div className="text-[clamp(2.8rem,5.5vw,5.5rem)] font-black leading-[0.98] tracking-tight text-black mb-6">
               <FoldText
                 text="OUR CLIENTS"

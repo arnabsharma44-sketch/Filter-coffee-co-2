@@ -12,13 +12,7 @@ export default function Showreel() {
           className="relative rounded-3xl overflow-hidden min-h-[460px] md:min-h-[560px] flex items-center p-8 md:p-16 border border-white/10 shadow-2xl"
           style={{ backgroundColor: '#000000' }}
         >
-          {/* ── Top Status Badge ── */}
-          <div className="absolute top-6 left-6 md:top-10 md:left-10 z-[3] flex items-center gap-3">
-            <span className="glass-pill px-4 py-1.5 rounded-full text-[0.65rem] font-black uppercase tracking-widest text-white/90 bg-white/10 backdrop-blur-md border border-white/15 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-brand-yellow inline-block animate-pulse" />
-              ABOUT FILTER COFFEE CO.
-            </span>
-          </div>
+
 
           {/* ── Content Narrative Context ── */}
           <div className="relative z-[2] w-full max-w-[1100px]">

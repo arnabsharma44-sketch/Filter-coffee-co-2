@@ -26,10 +26,6 @@ export default function Team() {
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.8, ease: [0.16,1,0.3,1] }}
           className="text-center mb-16">
-          <div className="inline-flex items-center gap-2.5 text-[0.68rem] font-bold tracking-widest2 uppercase text-smoke mb-5 glass-pill px-4 py-1.5 rounded-full mx-auto">
-            <span className="w-2 h-2 rounded-full bg-brand-yellow inline-block animate-pulse" />
-            OUR PEOPLE
-          </div>
           <h2 className="text-[clamp(2.8rem,5.5vw,5.5rem)] font-black leading-[0.98] tracking-[-0.035em] uppercase text-black mb-8">
             MEET THE TEAM
           </h2>
