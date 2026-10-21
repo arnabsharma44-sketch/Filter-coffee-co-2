@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 
 /**
  * Hero Component — Video background with instant poster pre-render and fast-start streaming.
@@ -127,34 +126,9 @@ export default function Hero() {
           <source src="/videos/homepage/bg-video-optimized.webm" type="video/webm" />
           <source src="/videos/homepage/bg%20video%20homepage.mp4" type="video/mp4" />
         </video>
-
-        {/* Enhanced dark gradient overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80 pointer-events-none" />
-        {/* Subtle vignette for depth */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30 pointer-events-none" />
       </div>
 
-      {/* Bottom CTA / Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5, duration: 0.8 }}
-        className="absolute bottom-8 right-6 md:right-12 flex items-center gap-6 z-10"
-      >
-        <p className="text-[0.7rem] uppercase font-semibold tracking-widest text-white/50 hidden md:block">
-          Scroll to explore
-        </p>
-        <a
-          href="#about"
-          className="w-[80px] h-[80px] rounded-full bg-white text-black flex items-center justify-center group hover:bg-yellow-400 hover:text-black transition-colors duration-300"
-          aria-label="Scroll to explore about section"
-        >
-          <svg className="w-6 h-6 group-hover:translate-y-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
-        </a>
-      </motion.div>
+
 
       {/* Mute/Unmute Button - Bottom Right */}
       {showMuteButton && (

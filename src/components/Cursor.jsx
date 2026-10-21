@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import TextCursor from './TextCursor';
 
 /**
- * Custom Cursor with TextCursor integration from React Bits.
- * Displays a sleek trailing "FCC" stamp trail with an optional precision point.
+ * Standard Animated Custom Cursor — Smooth fluid follow ring + precision center dot.
+ * Completely trail-free, responsive with rAF lerp, hover expansion, and click animation.
  */
 export default function Cursor() {
   const dotRef = useRef(null);
+  const ringRef = useRef(null);
   const [isTouch] = useState(() => {
     if (typeof window === 'undefined') return false;
     return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
@@ -18,48 +18,141 @@ export default function Cursor() {
       return;
     }
 
+    let mx = window.innerWidth / 2;
+    let my = window.innerHeight / 2;
+    let rx = mx;
+    let ry = my;
+    let rafId = null;
+    let isMoving = false;
+    let isVisible = false;
+
+    const setVisibility = (visible) => {
+      isVisible = visible;
+      const opacity = visible ? '1' : '0';
+      if (dotRef.current) dotRef.current.style.opacity = opacity;
+      if (ringRef.current) ringRef.current.style.opacity = opacity;
+    };
+
+    const loop = () => {
+      // Smooth interpolation for the outer ring
+      rx += (mx - rx) * 0.18;
+      ry += (my - ry) * 0.18;
+
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
+      }
+
+      // Stop loop when close enough to save CPU
+      if (Math.abs(mx - rx) < 0.25 && Math.abs(my - ry) < 0.25) {
+        isMoving = false;
+        return;
+      }
+
+      rafId = requestAnimationFrame(loop);
+    };
+
+    const startLoop = () => {
+      if (!isMoving) {
+        isMoving = true;
+        rafId = requestAnimationFrame(loop);
+      }
+    };
+
     const onMouseMove = (e) => {
+      mx = e.clientX;
+      my = e.clientY;
+
+      if (!isVisible) {
+        rx = mx;
+        ry = my;
+        setVisibility(true);
+      }
+
+      // Center dot follows directly with 0 latency
       if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
+        dotRef.current.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%, -50%)`;
+      }
+
+      startLoop();
+    };
+
+    const onMouseDown = () => {
+      if (ringRef.current) ringRef.current.classList.add('active');
+    };
+
+    const onMouseUp = () => {
+      if (ringRef.current) ringRef.current.classList.remove('active');
+    };
+
+    const onMouseLeave = () => {
+      setVisibility(false);
+    };
+
+    const onMouseEnter = () => {
+      setVisibility(true);
+    };
+
+    // Hover detection for interactive elements
+    const onMouseOver = (e) => {
+      const el = e.target;
+      if (
+        el &&
+        (el.tagName === 'A' ||
+          el.tagName === 'BUTTON' ||
+          el.getAttribute('role') === 'button' ||
+          el.closest('a, button, .mag-btn, .work-card, .logo-slot, .service-card, input, select, textarea'))
+      ) {
+        if (ringRef.current) ringRef.current.classList.add('hovered');
+      }
+    };
+
+    const onMouseOut = (e) => {
+      const el = e.target;
+      if (
+        el &&
+        (el.tagName === 'A' ||
+          el.tagName === 'BUTTON' ||
+          el.getAttribute('role') === 'button' ||
+          el.closest('a, button, .mag-btn, .work-card, .logo-slot, .service-card, input, select, textarea'))
+      ) {
+        if (ringRef.current) ringRef.current.classList.remove('hovered');
       }
     };
 
     window.addEventListener('mousemove', onMouseMove, { passive: true });
-    return () => window.removeEventListener('mousemove', onMouseMove);
-  }, []);
+    window.addEventListener('mousedown', onMouseDown, { passive: true });
+    window.addEventListener('mouseup', onMouseUp, { passive: true });
+    document.addEventListener('mouseleave', onMouseLeave);
+    document.addEventListener('mouseenter', onMouseEnter);
+    document.addEventListener('mouseover', onMouseOver, { passive: true });
+    document.addEventListener('mouseout', onMouseOut, { passive: true });
+
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mousedown', onMouseDown);
+      window.removeEventListener('mouseup', onMouseUp);
+      document.removeEventListener('mouseleave', onMouseLeave);
+      document.removeEventListener('mouseenter', onMouseEnter);
+      document.removeEventListener('mouseover', onMouseOver);
+      document.removeEventListener('mouseout', onMouseOut);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, [isTouch]);
 
   if (isTouch) return null;
 
   return (
     <>
-      {/* Precision Tip Dot */}
+      {/* Precision Center Dot */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-[#111318] pointer-events-none z-[100000] will-change-transform"
+        className="cursor-dot opacity-0 transition-opacity duration-200 pointer-events-none"
       />
-
-      {/* React Bits TextCursor Stamp Trail */}
-      <div className="fixed inset-0 pointer-events-none z-[99999] overflow-hidden text-cursor--global">
-        <TextCursor
-          text="FCC"
-          mode="stamp"
-          fontSize={22}
-          fontWeight={800}
-          color="#111318"
-          fontFamily="Outfit, 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif"
-          spacing={76}
-          maxPoints={7}
-          shrink={0.5}
-          fade={0.65}
-          smoothing={0.25}
-          exitDuration={0.45}
-          removalInterval={28}
-          followMouseDirection={true}
-          keepUpright={true}
-          randomFloat={true}
-          popIn={true}
-        />
-      </div>
+      {/* Fluid Outer Following Ring */}
+      <div
+        ref={ringRef}
+        className="cursor-ring opacity-0 transition-opacity duration-200 pointer-events-none"
+      />
     </>
   );
 }
